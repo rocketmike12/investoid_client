@@ -1,0 +1,12 @@
+@import "/src/sass/base/reset.scss";
+@import "/src/sass/utils/mixins.scss";
+@import "/src/sass/utils/variables.scss";
+
+* {
+    transition: 200ms;
+    transition-property: transform;
+}
+
+body {
+    font-family: Roboto;
+}

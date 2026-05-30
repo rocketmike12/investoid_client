@@ -1,0 +1,19 @@
+@import "../../sass/base/base.scss";
+
+.container {
+	width: 100%;
+	margin: 0 auto;
+	outline: 1px solid blueviolet;
+
+	@include mob {
+		width: 300px;
+	}
+
+	@include tab {
+		width: 436px;
+	}
+
+	@include desk {
+		width: 1060px;
+	}
+}
