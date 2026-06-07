@@ -16,6 +16,7 @@ export const App = function () {
 	const getSession = async function () {
 		try {
 			const { data } = await userApi.post("/session", "", { withCredentials: true });
+			console.log(data);
 			stateLogin(data.email);
 			stateSetOperations(data.operations);
 		} catch (err: any) {
