@@ -7,9 +7,11 @@ import { userApi } from "./apis/userApi";
 
 import { Routes, Route } from "react-router";
 
+import { AuthPage } from "./pages/AuthPage/AuthPage";
 import { MainPage } from "./pages/MainPage/MainPage";
 
 export const App = function () {
+	const stateIsLogin = useAuthStore((state) => state.isLogin);
 	const stateLogin = useAuthStore((state) => state.login);
 	const stateSetOperations = useAuthStore((state) => state.setOperations);
 
@@ -40,7 +42,7 @@ export const App = function () {
 			<DebugOverlay />
 
 			<Routes>
-				<Route path="/" element={<MainPage />} />
+				<Route path="/" element={stateIsLogin ? <MainPage /> : <AuthPage />} />
 			</Routes>
 		</>
 	);
