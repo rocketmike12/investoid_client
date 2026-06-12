@@ -12,29 +12,10 @@ import { MainPage } from "./pages/MainPage/MainPage";
 
 export const App = function () {
 	const stateIsLogin = useAuthStore((state) => state.isLogin);
-	const stateLogin = useAuthStore((state) => state.login);
-	const stateSetOperations = useAuthStore((state) => state.setOperations);
-
-	const getSession = async function () {
-		try {
-			const { data } = await userApi.post("/session", "", { withCredentials: true });
-			console.log(data);
-			stateLogin(data.email);
-			stateSetOperations(data.operations);
-		} catch (err: any) {
-			if (err.status === 401) {
-				// setIsLoginLoading(false);
-				return;
-			}
-
-			console.error(err);
-		}
-
-		// setIsLoginLoading(false);
-	};
+	const session = useAuthStore((state) => state.session);
 
 	useEffect(() => {
-		getSession();
+		session();
 	}, []);
 
 	return (

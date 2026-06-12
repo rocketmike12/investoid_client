@@ -1,7 +1,5 @@
 import { useAuthStore } from "../store/authStore";
 
-import { userApi } from "../apis/userApi";
-
 export const DebugOverlay = function () {
 	const isLogin = useAuthStore((state) => state.isLogin);
 	const email = useAuthStore((state) => state.email);
@@ -13,13 +11,7 @@ export const DebugOverlay = function () {
 		console.log(state);
 	};
 
-	const stateLogout = useAuthStore((state) => state.logout);
-
-	const logoutUser = async function () {
-		const res = await userApi.post("/logout");
-		console.log(res);
-		stateLogout();
-	};
+	const logout = useAuthStore((state) => state.logout);
 
 	return (
 		<>
@@ -28,7 +20,7 @@ export const DebugOverlay = function () {
 				<p>email: {email}</p>
 				<p>operations: {JSON.stringify(operations)}</p>
 				<button onClick={consoleState}>console</button>
-				<button onClick={logoutUser}>log out</button>
+				<button onClick={logout}>log out</button>
 			</div>
 		</>
 	);

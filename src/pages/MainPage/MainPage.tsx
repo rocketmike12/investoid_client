@@ -1,11 +1,11 @@
-import { Container } from "../../components/Container/Container";
+import { AddOperation } from "./AddOperation/AddOperation";
+import { Operations } from "./Operations/Operations";
 
 export const MainPage = function () {
 	return (
 		<>
-			<Container>
-				<h1>Main</h1>
-			</Container>
+			<AddOperation />
+			<Operations />
 		</>
 	);
 };
