@@ -3,7 +3,6 @@ import { DebugOverlay } from "./components/DebugOverlay";
 import { useEffect } from "react";
 
 import { useAuthStore } from "./store/authStore";
-import { userApi } from "./apis/userApi";
 
 import { Routes, Route } from "react-router";
 
