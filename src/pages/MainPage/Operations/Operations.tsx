@@ -1,7 +1,5 @@
 import { useAuthStore } from "../../../store/authStore";
 
-import { Container } from "../../../components/Container/Container";
-
 import styles from "./Operations.module.scss";
 
 export const Operations = function () {
@@ -10,7 +8,6 @@ export const Operations = function () {
 
 	return (
 		<>
-			<Container>
 				<table className={styles["operations-table"]}>
 					<thead>
 						<tr>
@@ -31,7 +28,6 @@ export const Operations = function () {
 						))}
 					</tbody>
 				</table>
-			</Container>
 		</>
 	);
 };

@@ -1,5 +1,5 @@
-import type { ReactNode } from "react";
+import type { ReactNode, ComponentProps } from "react";
 
-export type ContainerProps = {
+export interface ContainerProps extends ComponentProps<"div"> {
 	children: ReactNode;
-};
+}

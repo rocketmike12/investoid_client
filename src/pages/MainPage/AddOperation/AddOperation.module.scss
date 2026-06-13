@@ -1,12 +1,80 @@
+@import "/src/sass/base/base.scss";
+
 .operation-form {
+	height: 45px;
 	display: flex;
-	flex-direction: column;
+	align-items: center;
+
+    &__calendar {
+        width: 20px;
+        height: 20px;
+        margin-right: 10px;
+    }
+
+	&__input-wrap {
+		width: 601px;
+		height: 100%;
+		display: flex;
+        margin-left: 23px;
+	}
+
+    & > input {
+        width: 74px;
+    }
 
 	&__input {
-		border: 1px solid lime;
+		height: 100%;
+
+		&:first-child {
+			border-radius: 16px 0 0 16px;
+		}
+
+		&:last-child {
+			border-radius: 0 16px 16px 0;
+		}
 
 		&--error {
-			border: 1px solid red;
+			border: 1px solid $accent-light;
+		}
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
+
+		&[type="number"] {
+			appearance: textfield;
+			-moz-appearance: textfield;
 		}
 	}
+
+	&__submit {
+		width: 125px;
+		height: 100%;
+		margin-left: 27px;
+
+		border-radius: 16px;
+
+		@include typography(inherit, 700, 12px, 2%, center);
+		text-transform: uppercase;
+		background-color: $accent-light;
+		color: #ffffff;
+	}
+
+	&__reset {
+		width: 125px;
+		height: 100%;
+		margin-left: 15px;
+
+		border-radius: 16px;
+
+		@include typography(inherit, 700, 12px, 2%, center);
+		text-transform: uppercase;
+		border: 1px solid #f5f6fb;
+		background-color: transparent;
+		color: $button-fg-light;
+	}
+
+	margin-bottom: 59px;
 }
