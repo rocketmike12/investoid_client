@@ -2,6 +2,8 @@ import { useAuthStore } from "../../../store/authStore";
 
 import { Container } from "../../../components/Container/Container";
 
+import styles from "./Operations.module.scss";
+
 export const Operations = function () {
 	const operations = useAuthStore((state) => state.operations);
 	console.log(operations);
@@ -9,7 +11,7 @@ export const Operations = function () {
 	return (
 		<>
 			<Container>
-				<table>
+				<table className={styles["operations-table"]}>
 					<thead>
 						<tr>
 							<th>Date</th>

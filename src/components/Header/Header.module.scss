@@ -1,0 +1,58 @@
+@import "../../sass/base/base.scss";
+
+.header {
+	padding: 12px 0;
+
+	& > div {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	&__logo {
+		width: 112px;
+		height: 31px;
+	}
+
+	&__user {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		&__display {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 10px;
+			padding-right: 20px;
+
+			border-right: 1px solid #e0e5eb;
+		}
+
+		&__avatar {
+			width: 32px;
+			height: 32px;
+			border-radius: 50%;
+			background-color: $avatar-bg;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+
+			&__initial {
+				@include typography(inherit, 700, 12px, 4%, center);
+			}
+		}
+
+		&__email {
+			@include typography(inherit, 400, 12px, 4%, center);
+            color: $sub-light;
+		}
+
+		&__logout {
+			padding-left: 20px;
+
+			@include typography(inherit, 400, 12px, 4%, center);
+            color: $sub-light;
+			text-decoration: underline;
+		}
+	}
+}
