@@ -1,6 +1,6 @@
 export interface Operation {
 	_id?: string;
-	date: Date;
+	date: string;
 	description: string;
 	category: string;
 	subcategory: string;
