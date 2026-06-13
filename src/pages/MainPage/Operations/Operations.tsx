@@ -23,10 +23,10 @@ export const Operations = function () {
 					<tbody>
 						{operations.map((el) => (
 							<tr key={el._id}>
-								<th>{el.date.toLocaleString("en-GB")}</th>
-								<th>{el.description}</th>
-								<th>{el.category}</th>
-								<th>{el.sum}</th>
+								<td>{el.date}</td>
+								<td>{el.description}</td>
+								<td>{el.category}</td>
+								<td>{el.sum}</td>
 							</tr>
 						))}
 					</tbody>

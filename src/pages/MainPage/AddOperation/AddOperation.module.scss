@@ -1,0 +1,12 @@
+.operation-form {
+	display: flex;
+	flex-direction: column;
+
+	&__input {
+		border: 1px solid lime;
+
+		&--error {
+			border: 1px solid red;
+		}
+	}
+}
