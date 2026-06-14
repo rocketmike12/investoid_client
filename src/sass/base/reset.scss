@@ -12,6 +12,10 @@ button {
 	cursor: pointer;
 }
 
+button:disabled {
+    cursor: not-allowed;
+}
+
 input {
     cursor: text;
     min-width: 0;
