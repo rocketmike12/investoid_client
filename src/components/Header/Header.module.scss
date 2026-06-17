@@ -1,7 +1,7 @@
 @import "../../sass/base/base.scss";
 
 .header {
-	padding: 12px 0;
+	padding: 10px 0;
 
 	& > div {
 		display: flex;
@@ -14,6 +14,8 @@
 	}
 
 	&__user {
+        height: 36px;
+
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
@@ -44,14 +46,14 @@
 
 		&__email {
 			@include typography(inherit, 400, 12px, 4%, center);
-            color: $sub-light;
+			color: $sub-light;
 		}
 
 		&__logout {
 			padding-left: 20px;
 
 			@include typography(inherit, 400, 12px, 4%, center);
-            color: $sub-light;
+			color: $sub-light;
 			text-decoration: underline;
 		}
 	}
