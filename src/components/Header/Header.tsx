@@ -21,24 +21,22 @@ export const Header = function () {
 	return (
 		<>
 			<header className={styles["header"]}>
-				<Container>
-					<img src={logo} alt="logo" className="header__logo" />
+				<img src={logo} alt="logo" className="header__logo" />
 
-					{isLogin && (
-						<div className={styles["header__user"]}>
-							<div className={styles["header__user__display"]}>
-								<div className={styles["header__user__avatar"]}>
-									<p className={styles["header__user__avatar__initial"]}>{email?.slice(0, 1).toUpperCase()}</p>
-								</div>
-
-								<p className={styles["header__user__email"]}>{email}</p>
+				{isLogin && (
+					<div className={styles["header__user"]}>
+						<div className={styles["header__user__display"]}>
+							<div className={styles["header__user__avatar"]}>
+								<p className={styles["header__user__avatar__initial"]}>{email?.slice(0, 1).toUpperCase()}</p>
 							</div>
-							<a href="" className={styles["header__user__logout"]} onClick={handleLogout}>
-								Log out
-							</a>
+
+							<p className={styles["header__user__email"]}>{email}</p>
 						</div>
-					)}
-				</Container>
+						<a href="" className={styles["header__user__logout"]} onClick={handleLogout}>
+							Log out
+						</a>
+					</div>
+				)}
 			</header>
 		</>
 	);

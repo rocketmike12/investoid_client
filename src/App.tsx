@@ -1,5 +1,3 @@
-import { DebugOverlay } from "./components/DebugOverlay";
-
 import { useEffect } from "react";
 
 import { useAuthStore } from "./store/authStore";
@@ -8,6 +6,8 @@ import { Routes, Route } from "react-router";
 
 import { AuthPage } from "./pages/AuthPage/AuthPage";
 import { MainPage } from "./pages/MainPage/MainPage";
+
+import "./App.module.scss";
 
 export const App = function () {
 	const stateIsLogin = useAuthStore((state) => state.isLogin);
@@ -19,8 +19,6 @@ export const App = function () {
 
 	return (
 		<>
-			<DebugOverlay />
-
 			<Routes>
 				<Route path="/" element={stateIsLogin ? <MainPage /> : <AuthPage />} />
 			</Routes>

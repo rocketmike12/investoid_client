@@ -3,10 +3,19 @@
 @import "/src/sass/utils/variables.scss";
 
 * {
-    transition: 200ms;
-    transition-property: transform;
+	transition: 200ms;
+	transition-property: transform;
+}
+
+html {
+	max-height: 100vh;
 }
 
 body {
-    font-family: Roboto;
+	font-family: Roboto;
+	max-height: 100vh;
+}
+
+#root {
+	max-height: 100vh;
 }

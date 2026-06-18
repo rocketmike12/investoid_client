@@ -1,12 +1,12 @@
 @import "../../sass/base/base.scss";
 
 .header {
-	padding: 10px 0;
+	padding: 10px 26px;
 
-	& > div {
-		display: flex;
-		justify-content: space-between;
-	}
+	display: flex;
+	justify-content: space-between;
+
+    background-color: $bg-light;
 
 	&__logo {
 		width: 112px;
@@ -14,7 +14,7 @@
 	}
 
 	&__user {
-        height: 36px;
+		height: 36px;
 
 		display: flex;
 		justify-content: space-between;
