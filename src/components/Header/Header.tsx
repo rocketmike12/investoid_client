@@ -1,7 +1,5 @@
 import { useAuthStore } from "../../store/authStore";
 
-import { Container } from "../Container/Container";
-
 import logo from "../../img/logo.svg";
 
 import styles from "./Header.module.scss";

@@ -1,10 +1,73 @@
+@import "/src/sass/base/base.scss";
+
+.operations {
+	display: flex;
+	gap: 30px;
+	height: fit-content;
+}
+
 .operations-table {
-	width: 100%;
+	width: 760px;
+	height: fit-content;
 
-	border: 1px solid blueviolet;
-
-	& th,
-	& td {
-		border: 1px solid blueviolet;
+	& thead tr {
+		background-color: $top-light;
+		border-radius: 20px 20px 0 0;
 	}
+
+	& thead th {
+		background-color: $top-light;
+		color: $fg-light;
+
+		&:first-child {
+			border-radius: 20px 0 0 0;
+		}
+
+		&:last-child {
+			border-radius: 0 20px 0 0;
+		}
+	}
+
+	& td {
+		padding: 14px 20px;
+
+		@include typography(inherit, 400, 12px, 4%, _);
+
+		color: $sub-light;
+
+		border-bottom: 2px solid $top-light;
+
+		&:first-child {
+			border-left: 2px solid $top-light;
+		}
+
+		&:last-child {
+			border-right: 2px solid $top-light;
+		}
+	}
+
+	& th {
+		padding: 14px 20px;
+
+		@include typography(inherit, 700, 12px, 2%, left);
+		text-transform: uppercase;
+
+		background-color: $top-light;
+	}
+
+	.delete {
+		&__button {
+			width: 32px;
+			height: 32px;
+
+			background-color: transparent;
+			&__icon {
+				fill: $sub-light;
+			}
+		}
+	}
+}
+
+.summary {
+	width: 230px;
 }
