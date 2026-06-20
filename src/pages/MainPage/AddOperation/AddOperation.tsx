@@ -90,6 +90,7 @@ export const AddOperation = () => {
 					name="description"
 					className={styles["operation-form__input"]}
 					placeholder="description"
+					value={formData.description}
 					onChange={(e) => updateField("description")(e.target.value)}
 					error={shouldHighlight && !formData.description.trim()}
 					errorClassName={styles["operation-form__input--error"]}
@@ -100,6 +101,7 @@ export const AddOperation = () => {
 					name="category"
 					className={styles["operation-form__input"]}
 					placeholder="category"
+					value={formData.category}
 					onChange={(e) => updateField("category")(e.target.value)}
 					error={shouldHighlight && !formData.category.trim()}
 					errorClassName={styles["operation-form__input--error"]}
@@ -110,6 +112,7 @@ export const AddOperation = () => {
 					name="subcategory"
 					className={styles["operation-form__input"]}
 					placeholder="subcategory"
+					value={formData.subcategory}
 					onChange={(e) => updateField("subcategory")(e.target.value)}
 					error={shouldHighlight && !formData.subcategory.trim()}
 					errorClassName={styles["operation-form__input--error"]}
