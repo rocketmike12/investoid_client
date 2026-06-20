@@ -5,6 +5,17 @@
 * {
 	transition: 200ms;
 	transition-property: transform;
+
+	scrollbar-color: $sub-light;
+	scrollbar-width: thin;
+
+	::-webkit-scrollbar {
+		width: thin;
+	}
+
+	::-webkit-scrollbar-track {
+		background: $sub-light;
+	}
 }
 
 html {
