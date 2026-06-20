@@ -67,13 +67,21 @@
 	}
 
 	.delete {
+        width: 72px;
 		&__button {
 			width: 32px;
 			height: 32px;
 
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
 			background-color: transparent;
+
 			&__icon {
 				fill: $sub-light;
+                width: 18px;
+                height: 18px;
 			}
 		}
 	}
