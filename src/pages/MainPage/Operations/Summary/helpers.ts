@@ -5,7 +5,7 @@ export type MonthlySummary = {
 	total: number;
 };
 
-export const getMonthlySummary = function (operations: Operation[], monthsToShow = 6): MonthlySummary[] {
+export const getMonthlySummary = function (operations: Operation[]): MonthlySummary[] {
 	const totals: Record<string, number> = {};
 
 	for (const operation of operations) {
@@ -19,15 +19,16 @@ export const getMonthlySummary = function (operations: Operation[], monthsToShow
 
 	return Object.entries(totals)
 		.map(([key, total]) => ({ key, total }))
-		.sort((a, b) => b.key.localeCompare(a.key))
-		.slice(0, monthsToShow);
+		.sort((a, b) => b.key.localeCompare(a.key));
 };
 
 export const formatMonthKey = function (key: string) {
 	const [year, month] = key.split("-").map(Number);
 
-	return new Date(year, month - 1).toLocaleString("en-US", {
-		month: "long",
-		year: "numeric"
-	}).toLowerCase();
+	return new Date(year, month - 1)
+		.toLocaleString("en-US", {
+			month: "long",
+			year: "numeric"
+		})
+		.toLowerCase();
 };

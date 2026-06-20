@@ -4,18 +4,27 @@
 	display: flex;
 	gap: 30px;
 	height: fit-content;
+
+	.scroll-wrap {
+		position: relative;
+		height: 400px;
+
+		overflow-y: scroll;
+	}
 }
 
 .operations-table {
 	width: 760px;
 	height: fit-content;
 
-	overflow: scroll;
-
 	border-collapse: separate;
 	border-spacing: 0;
 
 	& thead th {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+
 		background-color: $top-light;
 		color: $fg-light;
 
@@ -74,6 +83,10 @@
 	width: 230px;
 
 	&__title {
+		position: sticky;
+		top: 0;
+		z-index: 1;
+
 		padding: 14px 0;
 		border-radius: 20px 20px 0 0;
 
@@ -88,19 +101,19 @@
 		height: 40px;
 		padding: 14px 20px;
 
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
 
 		@include typography(inherit, 400, 12px, 4%, _);
 		text-transform: uppercase;
 
 		background-color: $top-light;
 		color: $sub-light;
-        border-top: 2px solid $bg-light;
+		border-top: 2px solid $bg-light;
 
-        &:last-child {
-            border-radius: 0 0 20px 20px;
-        }
+		&:last-child {
+			border-radius: 0 0 20px 20px;
+		}
 	}
 }
