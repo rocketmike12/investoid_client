@@ -9,13 +9,18 @@ export function Summary() {
 	const summary = getMonthlySummary(operations);
 
 	return (
-		<ul className={styles["summary"]}>
-			{summary.map(({ key, total }) => (
-				<li key={key} className={styles["summary__item"]}>
-					<span className={styles["summary__key"]}>{formatMonthKey(key)}: </span>
-					<span className={styles["summary__value"]}>{total.toFixed(2)}</span>
-				</li>
-			))}
-		</ul>
+		<>
+			<div className={styles["summary"]}>
+				<h3 className={styles["summary__title"]}>Summary</h3>
+				<ul className={styles["summary__list"]}>
+					{summary.map(({ key, total }) => (
+						<li key={key} className={styles["summary__item"]}>
+							<span className={styles["summary__key"]}>{formatMonthKey(key)}: </span>
+							<span className={styles["summary__value"]}>{total.toFixed(2)}</span>
+						</li>
+					))}
+				</ul>
+			</div>
+		</>
 	);
 }
