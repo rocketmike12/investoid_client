@@ -10,26 +10,27 @@
 	width: 760px;
 	height: fit-content;
 
-	& thead tr {
-		background-color: $top-light;
-		border-radius: 20px 20px 0 0;
-	}
+	overflow: scroll;
+
+	border-collapse: separate;
+	border-spacing: 0;
 
 	& thead th {
 		background-color: $top-light;
 		color: $fg-light;
 
 		&:first-child {
-			border-radius: 20px 0 0 0;
+			border-top-left-radius: 20px;
 		}
 
 		&:last-child {
-			border-radius: 0 20px 0 0;
+			border-top-right-radius: 20px;
 		}
 	}
 
 	& td {
-		padding: 14px 20px;
+		height: 40px;
+		padding: 0 20px;
 
 		@include typography(inherit, 400, 12px, 4%, _);
 
@@ -47,7 +48,8 @@
 	}
 
 	& th {
-		padding: 14px 20px;
+		height: 40px;
+		padding: 0 20px;
 
 		@include typography(inherit, 700, 12px, 2%, left);
 		text-transform: uppercase;
@@ -70,4 +72,35 @@
 
 .summary {
 	width: 230px;
+
+	&__title {
+		padding: 14px 0;
+		border-radius: 20px 20px 0 0;
+
+		@include typography(inherit, 700, 12px, 2%, center);
+		vertical-align: middle;
+		text-transform: uppercase;
+
+		background-color: $top-light;
+	}
+
+	&__item {
+		height: 40px;
+		padding: 14px 20px;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+		@include typography(inherit, 400, 12px, 4%, _);
+		text-transform: uppercase;
+
+		background-color: $top-light;
+		color: $sub-light;
+        border-top: 2px solid $bg-light;
+
+        &:last-child {
+            border-radius: 0 0 20px 20px;
+        }
+	}
 }

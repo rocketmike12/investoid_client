@@ -9,7 +9,6 @@
 	&__calendar {
 		width: 20px;
 		height: 20px;
-		margin-right: 10px;
 		color: $sub-light;
 	}
 
@@ -17,11 +16,16 @@
 		width: 601px;
 		height: 100%;
 		display: flex;
-		margin-left: 23px;
 	}
 
 	&__date-input {
-		width: 74px;
+		height: 100%;
+		width: 95px;
+		padding: 10px;
+
+		display: flex;
+		justify-content: center;
+		align-items: center;
 
 		@include typography(inherit, 900, 12px, 4%, uppercase);
 		vertical-align: middle;

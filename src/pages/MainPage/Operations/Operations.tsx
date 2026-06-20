@@ -6,10 +6,14 @@ import { FaRegTrashAlt } from "react-icons/fa";
 
 import styles from "./Operations.module.scss";
 
+const MIN_ROWS = 10;
+
 export const Operations = function () {
 	const operations = useAuthStore((state) => state.operations);
 
 	const deleleOperation = useAuthStore((state) => state.deleteOperation);
+
+	const emptyRows = Math.max(0, MIN_ROWS - operations.length);
 
 	return (
 		<>
@@ -36,6 +40,15 @@ export const Operations = function () {
 										<FaRegTrashAlt className={styles["delete__button__icon"]} />
 									</button>
 								</td>
+							</tr>
+						))}
+						{Array.from({ length: emptyRows }).map((_, index) => (
+							<tr key={`empty-${index}`} className={styles["empty-row"]}>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
 							</tr>
 						))}
 					</tbody>

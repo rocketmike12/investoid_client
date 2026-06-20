@@ -3,8 +3,13 @@
 .background {
     height: 600px;
 
-	padding: 0 20px;
+	padding: 20px;
 	background-color: $bg-light;
-    border-radius: 30px 30px 0 30px;
+    border-radius: 30px;
 	box-shadow: 0px 10px 60px 0px #aab2c533;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
