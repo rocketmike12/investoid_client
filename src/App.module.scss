@@ -1,9 +1,10 @@
 @import "/src/sass/base/base.scss";
 
 body {
-
 	margin: 0;
-	background: url("./img/background.jpg") center / cover no-repeat;
+	background: url("./img/background.jpg") no-repeat;
+    background-position: bottom;
+    background-size: 100%;
 	position: relative;
 }
 

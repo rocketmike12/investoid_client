@@ -9,17 +9,19 @@
 	scrollbar-color: $sub-light;
 	scrollbar-width: thin;
 
-	::-webkit-scrollbar {
-		width: thin;
-	}
-
-	::-webkit-scrollbar-track {
-		background: $sub-light;
-	}
 }
 
 html {
 	max-height: 100vh;
+
+	&::-webkit-scrollbar {
+		background: $sub-light;
+		width: thin;
+	}
+
+	&::-webkit-scrollbar-track {
+		background: $sub-light;
+	}
 }
 
 body {
@@ -29,4 +31,12 @@ body {
 
 #root {
 	max-height: 100vh;
+}
+
+
+@supports not selector(::-webkit-scrollbar) {
+	html {
+		scrollbar-width: thin;
+		scrollbar-color: var(--thumb-color) var(--track-color);
+	}
 }
