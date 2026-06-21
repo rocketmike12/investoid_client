@@ -1,6 +1,7 @@
 import { useAuthStore } from "../../../store/authStore";
 
 import { parseDate } from "./helpers";
+import { toMajor } from "../../../utils/money";
 
 import { Summary } from "./Summary/Summary";
 
@@ -32,7 +33,7 @@ export const Operations = function () {
 							</tr>
 						</thead>
 						<tbody>
-							{operations.map((el) => (
+							{operations.map((el) => ({ ...el, sum: toMajor(el.sum) })).map((el) => (
 								<tr key={el._id}>
 									<td className={styles["date"]}>{el.date}</td>
 									<td className={styles["description"]}>{el.description}</td>

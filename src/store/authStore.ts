@@ -4,17 +4,22 @@ import { userApi } from "../apis/userApi";
 
 import type { Operation } from "./types";
 
+import { toMinor } from "../utils/money";
+
 import Swal from "sweetalert2";
 
 interface AuthState {
 	isLogin: boolean;
 	email: string | null;
+	balance: number;
 	operations: Operation[];
 
 	login: (email: string, password: string) => void;
 	register: (email: string, password: string) => void;
 	session: () => void;
 	logout: () => void;
+
+	setBalance: (balance: number) => void;
 
 	addOperation: (operation: Operation) => void;
 	deleteOperation: (id: string) => void;
@@ -24,6 +29,7 @@ interface AuthState {
 export const useAuthStore = create<AuthState>((set) => ({
 	isLogin: false,
 	email: null,
+	balance: 0,
 	operations: [],
 
 	login: async (email, password) => {
@@ -34,6 +40,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 			set({
 				isLogin: true,
 				email: data.email,
+				balance: data.balance,
 				operations: data.operations
 			});
 		} catch (err: any) {
@@ -56,6 +63,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 			set({
 				isLogin: true,
 				email: data.email,
+				balance: data.balance,
 				operations: data.operations
 			});
 		} catch (err: any) {
@@ -74,10 +82,12 @@ export const useAuthStore = create<AuthState>((set) => ({
 	session: async () => {
 		try {
 			const { data } = await userApi.post("/session", "", { withCredentials: true });
+			console.log(data);
 
 			set({
 				isLogin: true,
 				email: data.email,
+				balance: data.balance,
 				operations: data.operations
 			});
 		} catch (err: any) {
@@ -96,14 +106,31 @@ export const useAuthStore = create<AuthState>((set) => ({
 		set({
 			isLogin: false,
 			email: null,
+			balance: 0,
 			operations: []
 		});
 	},
 
+	setBalance: async (balance) => {
+		const { data } = await userApi.post("/balance", { balance: toMinor(balance) });
+		console.log(data);
+
+		set({
+			balance: data.balance,
+			operations: data.operations
+		});
+	},
+
 	addOperation: async (operation) => {
-		const { data } = await userApi.post("/operation/add", { operation }, { withCredentials: true });
+		const normalizedOperation = {
+			...operation,
+			sum: toMinor(operation.sum)
+		};
+
+		const { data } = await userApi.post("/operation/add", { operation: normalizedOperation }, { withCredentials: true });
 
 		set(() => ({
+			balance: data.balance,
 			operations: data.operations
 		}));
 	},
@@ -112,12 +139,8 @@ export const useAuthStore = create<AuthState>((set) => ({
 		const { data } = await userApi.post("/operation/del", { id }, { withCredentials: true });
 
 		set(() => ({
+			balance: data.balance,
 			operations: data.operations
 		}));
 	}
-
-	// updateOperation: (id, updates) =>
-	// 	set((state) => ({
-	// 		operations: state.operations.map((op) => (op.id === id ? { ...op, ...updates } : op))
-	// 	}))
 }));

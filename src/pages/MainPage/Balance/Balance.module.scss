@@ -1,0 +1,47 @@
+@import "/src/sass/base/base.scss";
+
+.balance {
+	height: 44px;
+
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: 20px;
+
+	&__label {
+		@include typography(inherit, 500, 12px, 2%, left);
+		color: rgba($sub-light, 70%);
+	}
+
+	&__form {
+		height: 100%;
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	&__balance {
+		width: 125px;
+		height: 100%;
+
+		border-radius: 16px;
+		border: 2px solid #ffffff;
+		background-color: transparent;
+
+		@include typography(inherit, 700, 12px, 2%, center);
+		color: $fg-light;
+	}
+
+	&__confirm {
+		width: 125px;
+		height: 100%;
+		background-color: transparent;
+
+		border-radius: 16px;
+		border: 2px solid #ffffff;
+
+		@include typography(inherit, 400, 12px, 2%, center);
+		text-transform: uppercase;
+		color: rgba($sub-light, 70%);
+	}
+}

@@ -1,4 +1,5 @@
 import { Header } from "../../components/Header/Header";
+import { Balance } from "./Balance/Balance";
 import { Background } from "./Background/Background";
 import { AddOperation } from "./AddOperation/AddOperation";
 import { Operations } from "./Operations/Operations";
@@ -10,6 +11,7 @@ export const MainPage = function () {
 		<>
 			<Header />
 			<main className={styles["main"]}>
+				<Balance />
 				<Background>
 					<AddOperation />
 					<Operations />
