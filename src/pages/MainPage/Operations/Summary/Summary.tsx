@@ -1,6 +1,6 @@
 import { useAuthStore } from "../../../../store/authStore";
 
-import { getMonthlySummary, formatMonthKey } from "./helpers";
+import { getMonthlySummary, formatMonthKey } from "../helpers";
 
 import styles from "../Operations.module.scss";
 

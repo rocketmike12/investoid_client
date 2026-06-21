@@ -1,4 +1,14 @@
-import type { Operation } from "../../../../store/types.ts";
+import type { Operation } from "../../../store/types.ts";
+
+export const parseDate = function (dateStr: string) {
+	const [day, month, year] = dateStr.split(".").map(Number);
+
+	const date = new Date(year, month - 1, day);
+
+	const valid = date.getFullYear() === year && date.getMonth() === month - 1 && date.getDate() === day;
+
+	return valid ? date.getTime() : 0;
+};
 
 export type MonthlySummary = {
 	key: string;

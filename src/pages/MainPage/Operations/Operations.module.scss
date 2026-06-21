@@ -61,6 +61,18 @@
 		background-color: $top-light;
 	}
 
+	.sum {
+		@include typography(inherit, 700, 12px, 4%, right);
+
+		&--plus {
+            color: #407946;
+		}
+
+		&--minus {
+			color: #e7192e;
+		}
+	}
+
 	.delete {
 		width: 72px;
 		&__button {

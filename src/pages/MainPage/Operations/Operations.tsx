@@ -1,5 +1,7 @@
 import { useAuthStore } from "../../../store/authStore";
 
+import { parseDate } from "./helpers";
+
 import { Summary } from "./Summary/Summary";
 
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -9,7 +11,7 @@ import styles from "./Operations.module.scss";
 const MIN_ROWS = 9;
 
 export const Operations = function () {
-	const operations = useAuthStore((state) => state.operations);
+	const operations = useAuthStore((state) => state.operations.sort((a, b) => parseDate(b.date) - parseDate(a.date)));
 
 	const deleleOperation = useAuthStore((state) => state.deleteOperation);
 
@@ -35,7 +37,7 @@ export const Operations = function () {
 									<td className={styles["date"]}>{el.date}</td>
 									<td className={styles["description"]}>{el.description}</td>
 									<td className={styles["category"]}>{`${el.category} > ${el.subcategory}`}</td>
-									<td className={styles["sum"]}>{el.sum.toFixed(2)}</td>
+									<td className={`${styles["sum"]} ${el.sum > 0 ? styles["sum--plus"] : styles["sum--minus"]}`}>{(el.sum > 0 ? "+" : "") + el.sum.toFixed(2)}</td>
 									<td className={styles["delete"]}>
 										<button onClick={() => deleleOperation(el._id || "")} className={styles["delete__button"]}>
 											<FaRegTrashAlt className={styles["delete__button__icon"]} />

@@ -123,12 +123,12 @@ export const AddOperation = () => {
 					inputMode="decimal"
 					name="sum"
 					className={styles["operation-form__input"]}
-					placeholder="00.00"
+					placeholder="±00.00"
 					value={formData.sum}
 					onChange={(e) => {
 						const next = e.target.value;
 
-						if (next === "" || next === "-" || validateSum(next)) {
+						if (next === "" || next === "-" || next == "+" || validateSum(next)) {
 							updateField("sum")(next);
 						}
 					}}
