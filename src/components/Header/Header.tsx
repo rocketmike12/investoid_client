@@ -1,4 +1,5 @@
 import { useAuthStore } from "../../store/authStore";
+import { confirm } from "../../store/helpers";
 
 import logo from "../../img/logo.svg";
 
@@ -11,8 +12,14 @@ export const Header = function () {
 
 	const logout = useAuthStore((state) => state.logout);
 
-	const handleLogout: MouseEventHandler<HTMLAnchorElement> = (e) => {
+	const handleLogout: MouseEventHandler<HTMLAnchorElement> = async (e) => {
 		e.preventDefault();
+
+		const ok = await confirm("Are you sure you want to log out?");
+		if (!ok) {
+			return;
+		}
+
 		logout();
 	};
 
