@@ -1,8 +1,9 @@
 import { useEffect, useState, type SubmitEventHandler } from "react";
 
 import { useAuthStore } from "../../../store/authStore";
+import { confirm } from "../../../store/helpers";
 
-import { toMinor, toMajor } from "../../../utils/money";
+import { toMajor } from "../../../utils/money";
 
 import styles from "./Balance.module.scss";
 
@@ -18,15 +19,22 @@ export const Balance = function () {
 
 	const validateBalance = (value: string): boolean => /^\d+(\.\d{0,2})?$/.test(value);
 
-	const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+	const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
+
 		const form = e.currentTarget as typeof e.currentTarget & {
 			balance: { value: string };
 		};
 
-		const balance = form.balance.value;
+		const ok = await confirm("WARNING: Setting your balance will erase all of your current records");
+		if (!ok) {
+			setValue(toMajor(balance).toFixed(2));
+			return;
+		}
 
-		setBalance(Number.parseFloat(balance));
+		const parsedBalance = form.balance.value;
+
+		setBalance(Number.parseFloat(parsedBalance));
 
 		form.reset();
 	};

@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router";
 import { AuthPage } from "./pages/AuthPage/AuthPage";
 import { MainPage } from "./pages/MainPage/MainPage";
 
+
 import "./App.module.scss";
 
 export const App = function () {

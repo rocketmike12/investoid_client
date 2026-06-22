@@ -1,0 +1,12 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.backdrop.hidden {
+    visibility: hidden;
+    opacity: 0;
+    display: none;
+    pointer-events: none;
+}
