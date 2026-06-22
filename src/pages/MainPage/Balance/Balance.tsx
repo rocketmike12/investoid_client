@@ -26,7 +26,7 @@ export const Balance = function () {
 			balance: { value: string };
 		};
 
-		const ok = await confirm("WARNING: Setting your balance will erase all of your current records");
+		const ok = await confirm("This will erase all current records. Are you sure?");
 		if (!ok) {
 			setValue(toMajor(balance).toFixed(2));
 			return;
