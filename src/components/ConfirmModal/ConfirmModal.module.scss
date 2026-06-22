@@ -1,12 +1,86 @@
+@import "/src/sass/base/base.scss";
+
 .backdrop {
-    position: fixed;
-    top: 0;
-    left: 0;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+	z-index: 2;
+
+	background-color: rgba($sub-light, 25%);
 }
 
 .backdrop.hidden {
-    visibility: hidden;
-    opacity: 0;
-    display: none;
-    pointer-events: none;
+	visibility: hidden;
+	opacity: 0;
+	display: none;
+	pointer-events: none;
+}
+
+.modal {
+	width: 390px;
+	height: 200px;
+    padding: 20px;
+
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+    gap: 20px;
+
+	border-radius: 20px;
+
+	background-color: $bg-light;
+
+	&__message {
+        height: 44px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+		@include typography(inherit, 500, 14px, 2%, center);
+        color: $sub-light;
+	}
+
+	&__wrap {
+		height: 44px;
+
+		display: flex;
+		align-items: center;
+		gap: 20px;
+	}
+
+	&__confirm {
+		width: 125px;
+		height: 100%;
+
+		border-radius: 16px;
+
+		@include typography(inherit, 700, 12px, 2%, center);
+		text-transform: uppercase;
+
+		background-color: $accent-light;
+		color: $bg-light;
+	}
+
+	&__cancel {
+		width: 125px;
+		height: 100%;
+
+		border: 2px solid #f5f6fb;
+		border-radius: 16px;
+
+		@include typography(inherit, 700, 12px, 2%, center);
+		text-transform: uppercase;
+
+		background-color: $bg-light;
+		color: $sub-light;
+	}
 }
