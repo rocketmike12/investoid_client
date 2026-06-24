@@ -1,4 +1,4 @@
-import type { SubmitEventHandler } from "react";
+import type { KeyboardEventHandler, SubmitEventHandler } from "react";
 
 import { useState } from "react";
 
@@ -66,7 +66,43 @@ export const AddOperation = () => {
 			sum: parseFloat(formData.sum)
 		});
 
+		const form = e.currentTarget;
+		form.querySelectorAll<HTMLInputElement>("input")[0].focus();
+
 		resetState();
+	};
+
+	const handleEnter: KeyboardEventHandler<HTMLInputElement> = (e) => {
+		if (e.key !== "Enter") return;
+
+		const form = e.currentTarget.form;
+		if (!form) return;
+
+		const inputs = Array.from(form.querySelectorAll<HTMLInputElement>("input")).filter((el) => !el.disabled && el.type !== "hidden");
+
+		const currentIndex = inputs.indexOf(e.currentTarget);
+		if (currentIndex === -1) return;
+
+		const isFilled = (el: HTMLInputElement) => el.value.trim().length > 0;
+
+		let nextIndex = -1;
+
+		for (let i = 1; i <= inputs.length; i++) {
+			const idx = (currentIndex + i) % inputs.length;
+			if (!isFilled(inputs[idx])) {
+				nextIndex = idx;
+				break;
+			}
+		}
+
+		e.preventDefault();
+
+		if (nextIndex === -1) {
+			form.requestSubmit();
+			return;
+		}
+
+		inputs[nextIndex].focus();
 	};
 
 	return (
@@ -80,6 +116,7 @@ export const AddOperation = () => {
 				placeholder="DD.MM.YYYY"
 				value={formData.date}
 				onChange={(e) => updateField("date")(formatDateInput(e.target.value))}
+				onKeyDown={handleEnter}
 				error={shouldHighlight && !validateDate(formData.date)}
 				errorClassName={styles["operation-form__date-input--error"]}
 			/>
@@ -92,6 +129,7 @@ export const AddOperation = () => {
 					placeholder="description"
 					value={formData.description}
 					onChange={(e) => updateField("description")(e.target.value)}
+					onKeyDown={handleEnter}
 					error={shouldHighlight && !formData.description.trim()}
 					errorClassName={styles["operation-form__input--error"]}
 				/>
@@ -103,6 +141,7 @@ export const AddOperation = () => {
 					placeholder="category"
 					value={formData.category}
 					onChange={(e) => updateField("category")(e.target.value)}
+					onKeyDown={handleEnter}
 					error={shouldHighlight && !formData.category.trim()}
 					errorClassName={styles["operation-form__input--error"]}
 				/>
@@ -114,6 +153,7 @@ export const AddOperation = () => {
 					placeholder="subcategory"
 					value={formData.subcategory}
 					onChange={(e) => updateField("subcategory")(e.target.value)}
+					onKeyDown={handleEnter}
 					error={shouldHighlight && !formData.subcategory.trim()}
 					errorClassName={styles["operation-form__input--error"]}
 				/>
@@ -132,6 +172,7 @@ export const AddOperation = () => {
 							updateField("sum")(next);
 						}
 					}}
+					onKeyDown={handleEnter}
 					onBlur={handleSumBlur}
 					error={shouldHighlight && !formData.sum.trim()}
 					errorClassName={styles["operation-form__input--error"]}

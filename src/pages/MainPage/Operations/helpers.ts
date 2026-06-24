@@ -1,4 +1,5 @@
 import type { Operation } from "../../../store/types.ts";
+import { toMajor } from "../../../utils/money.ts";
 
 export const parseDate = function (dateStr: string) {
 	const [day, month, year] = dateStr.split(".").map(Number);
@@ -24,7 +25,7 @@ export const getMonthlySummary = function (operations: Operation[]): MonthlySumm
 		const key = `${year}-${month}`;
 
 		totals[key] ??= 0;
-		totals[key] += operation.sum;
+		totals[key] += toMajor(operation.sum);
 	}
 
 	return Object.entries(totals)
