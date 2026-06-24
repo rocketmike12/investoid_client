@@ -2,9 +2,9 @@
 
 body {
 	margin: 0;
-	background: url("./img/background.jpg") no-repeat;
-    background-position: bottom;
-    background-size: 100%;
+	background: url("./img/background.png") no-repeat;
+	background-position: bottom;
+	background-size: 100%;
 	position: relative;
 }
 
@@ -14,9 +14,15 @@ body::before {
 	inset: 0 0 auto 0;
 
 	height: 583px;
-	background: #f2f5fc;
 
 	border-bottom-left-radius: 60px;
 
 	z-index: -1;
+}
+
+body::before {
+	background-image: url("/src/img/background.png"), linear-gradient($top-light);
+	background-repeat: no-repeat, no-repeat;
+    background-size: 100%, 100%;
+    background-position: top, top;
 }

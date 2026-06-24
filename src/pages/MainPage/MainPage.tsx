@@ -9,12 +9,9 @@ import { ConfirmModal } from "../../components/ConfirmModal/ConfirmModal";
 import styles from "./MainPage.module.scss";
 
 export const MainPage = function () {
-	const handleConfirm = () => {};
-	const handleCancel = () => {};
-
 	return (
 		<>
-			<ConfirmModal onConfirm={handleConfirm} onCancel={handleCancel} />
+			<ConfirmModal />
 
 			<Header />
 			<main className={styles["main"]}>

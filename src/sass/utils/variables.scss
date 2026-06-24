@@ -2,17 +2,22 @@ $bg-light: #ffffff;
 $fg-light: #000000;
 $accent-light: #ff751d;
 
-$disabled-light: #ff751d88;
+$content-shadow-light: 0px 10px 60px 0px #aab2c533;
+
+$disabled-light: rgba($accent-light, 50%);
 
 $top-light: #f5f6fb;
 $sub-light: #52555f;
-$body-top-light: #F2F5FC;
+$body-top-light: #f2f5fc;
 
 $button-bg-light: #f5f6fb;
 $button-fg-light: #52555f;
 
+$button-shadow-light: 1px 3px 5px 0px #52555f26;
+
 $input-bg-light: #f6f7fb;
-$input-fg-light: #a6abb9;
+$input-fg-light: #000000;
+$input-placeholder-light: #a6abb9;
 
 ////
 

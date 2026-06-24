@@ -2,6 +2,8 @@ import { useState, type SubmitEventHandler } from "react";
 
 import { useAuthStore } from "../../../store/authStore";
 
+import styles from "../AuthPage.module.scss";
+
 export const AuthForm = function () {
 	const [authRole, setAuthRole] = useState<"login" | "register">("login");
 
@@ -31,27 +33,35 @@ export const AuthForm = function () {
 
 	return (
 		<>
-			<form onSubmit={handleSubmit}>
-				<label htmlFor="email">Email:</label>
-				<input type="email" name="email" />
-				<label htmlFor="password">Password:</label>
-				<input type="password" name="password" />
-				<button
-					type="submit"
-					onClick={() => {
-						setAuthRole("login");
-					}}
-				>
-					LOG IN
-				</button>
-				<button
-					type="submit"
-					onClick={() => {
-						setAuthRole("register");
-					}}
-				>
-					SIGN UP
-				</button>
+			<form onSubmit={handleSubmit} className={styles["auth__form"]}>
+				<label htmlFor="email" className={styles["auth__form__label"]}>
+					Email:
+				</label>
+				<input type="email" name="email" placeholder="your@email.com" className={styles["auth__form__input"]} />
+				<label htmlFor="password" className={styles["auth__form__label"]}>
+					Password:
+				</label>
+				<input type="password" name="password" placeholder="password" className={styles["auth__form__input"]} />
+				<div className={styles["auth__form__button-wrap"]}>
+					<button
+						type="submit"
+						onClick={() => {
+							setAuthRole("login");
+						}}
+						className={styles["auth__form__login"]}
+					>
+						LOG IN
+					</button>
+					<button
+						type="submit"
+						onClick={() => {
+							setAuthRole("register");
+						}}
+						className={styles["auth__form__sign-up"]}
+					>
+						SIGN UP
+					</button>
+				</div>
 			</form>
 		</>
 	);

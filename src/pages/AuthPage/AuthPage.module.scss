@@ -1,0 +1,102 @@
+@import "/src/sass/base/base.scss";
+
+.auth {
+	flex: 1;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	& > div {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 120px;
+	}
+
+	&__title-wrap {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	&__title {
+		@include typography(inherit, 900, 102px, 0%, _);
+		color: $fg-light;
+	}
+
+	&__subtitle {
+		@include typography(inherit, 700, 16px, 18%, _);
+		text-transform: uppercase;
+		color: $sub-light;
+	}
+
+	&__form {
+		padding: 40px;
+
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+
+		border-radius: 20px;
+
+		background-color: $bg-light;
+
+		box-shadow: $content-shadow-light;
+
+		&__label {
+			margin-bottom: 10px;
+			@include typography(inherit, 400, 12px, 4%, _);
+		}
+
+		&__input {
+			width: 265px;
+			height: 52px;
+			border-radius: 30px;
+			margin-bottom: 30px;
+
+			padding: 0 20px;
+
+			@include typography(inherit, 400, 14px, 4%, _);
+
+			background-color: $input-bg-light;
+			color: $input-fg-light;
+
+			&::placeholder {
+				color: $input-placeholder-light;
+
+				@include typography(inherit, 400, 14px, 4%, _);
+			}
+
+		}
+
+		&__button-wrap {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			gap: 15px;
+		}
+
+		&__login {
+			width: 125px;
+			height: 44px;
+			border-radius: 16px;
+
+			background-color: $accent-light;
+			color: $bg-light;
+
+			box-shadow: $button-shadow-light;
+		}
+
+		&__sign-up {
+			width: 125px;
+			height: 44px;
+			border-radius: 16px;
+
+			background-color: $top-light;
+			color: $fg-light;
+
+			box-shadow: $button-shadow-light;
+		}
+	}
+}
