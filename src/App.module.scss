@@ -13,7 +13,11 @@ body::before {
 	position: fixed;
 	inset: 0 0 auto 0;
 
-	height: 583px;
+    height: 342px;
+
+	@include tab() {
+		height: 583px;
+	}
 
 	border-bottom-left-radius: 60px;
 
@@ -23,6 +27,6 @@ body::before {
 body::before {
 	background-image: url("/src/img/background.png"), linear-gradient($top-light);
 	background-repeat: no-repeat, no-repeat;
-    background-size: 100%, 100%;
-    background-position: top, top;
+	background-size: 100%, 100%;
+	background-position: top, top;
 }

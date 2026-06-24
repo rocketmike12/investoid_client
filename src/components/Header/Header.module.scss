@@ -45,6 +45,10 @@
 		}
 
 		&__email {
+            @include mob() {
+                display: none;
+            }
+
 			@include typography(inherit, 400, 12px, 4%, center);
 			color: $sub-light;
 		}
