@@ -9,9 +9,10 @@
 
 	& > div {
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: 120px;
+		gap: 50px;
 	}
 
 	&__title-wrap {
@@ -21,18 +22,21 @@
 	}
 
 	&__title {
-		@include typography(inherit, 900, 102px, 0%, _);
+		@include typography(inherit, 900, 64px, 0%, _);
 		color: $fg-light;
 	}
 
 	&__subtitle {
-		@include typography(inherit, 700, 16px, 18%, _);
+		@include typography(inherit, 700, 13px, 18%, _);
 		text-transform: uppercase;
 		color: $sub-light;
 	}
 
 	&__form {
-		padding: 40px;
+		width: 100%;
+		max-width: 436px;
+
+		padding: 30px 40px;
 
 		display: flex;
 		flex-direction: column;
@@ -50,7 +54,7 @@
 		}
 
 		&__input {
-			width: 265px;
+			width: 253px;
 			height: 52px;
 			border-radius: 30px;
 			margin-bottom: 30px;
@@ -67,7 +71,6 @@
 
 				@include typography(inherit, 400, 14px, 4%, _);
 			}
-
 		}
 
 		&__button-wrap {
@@ -97,6 +100,35 @@
 			color: $fg-light;
 
 			box-shadow: $button-shadow-light;
+		}
+	}
+}
+
+@include tab() {
+	.auth {
+		&__title {
+			@include typography(inherit, 900, 102px, 0%, _);
+		}
+
+		&__subtitle {
+			@include typography(inherit, 700, 19px, 18%, _);
+		}
+
+		&__form {
+			padding: 40px;
+
+			&__input {
+				width: 265px;
+			}
+		}
+	}
+}
+
+@include desk() {
+	.auth {
+		& > div {
+			flex-direction: row;
+			gap: 120px;
 		}
 	}
 }
