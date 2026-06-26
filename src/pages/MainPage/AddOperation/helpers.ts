@@ -1,8 +1,8 @@
 export const formatDate = (dateNum: number) => {
 	const date = new Date(dateNum);
 
-	const day = date.getDay().toString();
-	const month = date.getMonth().toString();
+	const day = date.getDate().toString();
+	const month = (date.getMonth() + 1).toString();
 	const year = date.getFullYear().toString();
 
 	return `${day.padStart(2, "0")}.${month.padStart(2, "0")}.${year}`;
