@@ -12,7 +12,7 @@ import { FORM_DATA_INIT, type FormData, formatDateInput, isFormDirty, validateDa
 
 import styles from "./AddOperation.module.scss";
 
-export const AddOperation = () => {
+export const AddOperation = ({ isVisible }: { isVisible: boolean }) => {
 	const addOperation = useAuthStore((state) => state.addOperation);
 
 	const [formData, setFormData] = useState<FormData>(FORM_DATA_INIT);
@@ -106,20 +106,22 @@ export const AddOperation = () => {
 	};
 
 	return (
-		<form onSubmit={handleSubmit} onBlur={handleFormBlur} className={styles["operation-form"]}>
-			<FaRegCalendarAlt className={styles["operation-form__calendar"]} />
+		<form onSubmit={handleSubmit} onBlur={handleFormBlur} className={`${styles["operation-form"]} ${isVisible ? styles["visible"] : ""}`}>
+			<div className={styles["operation-form__date-wrap"]}>
+				<FaRegCalendarAlt className={styles["operation-form__calendar"]} />
 
-			<Input
-				type="text"
-				name="date"
-				className={styles["operation-form__date-input"]}
-				placeholder="DD.MM.YYYY"
-				value={formData.date}
-				onChange={(e) => updateField("date")(formatDateInput(e.target.value))}
-				onKeyDown={handleEnter}
-				error={shouldHighlight && !validateDate(formData.date)}
-				errorClassName={styles["operation-form__date-input--error"]}
-			/>
+				<Input
+					type="text"
+					name="date"
+					className={styles["operation-form__date-input"]}
+					placeholder="DD.MM.YYYY"
+					value={formData.date}
+					onChange={(e) => updateField("date")(formatDateInput(e.target.value))}
+					onKeyDown={handleEnter}
+					error={shouldHighlight && !validateDate(formData.date)}
+					errorClassName={styles["operation-form__date-input--error"]}
+				/>
+			</div>
 
 			<div className={styles["operation-form__input-wrap"]}>
 				<Input
@@ -179,13 +181,15 @@ export const AddOperation = () => {
 				/>
 			</div>
 
-			<button type="submit" disabled={!validateForm(formData)} className={styles["operation-form__submit"]}>
-				Add
-			</button>
+			<div className={styles["operation-form__button-wrap"]}>
+				<button type="submit" disabled={!validateForm(formData)} className={styles["operation-form__submit"]}>
+					Add
+				</button>
 
-			<button type="reset" onClick={resetState} className={styles["operation-form__reset"]}>
-				Clear
-			</button>
+				<button type="reset" onClick={resetState} className={styles["operation-form__reset"]}>
+					Clear
+				</button>
+			</div>
 		</form>
 	);
 };

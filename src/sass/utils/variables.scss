@@ -4,7 +4,7 @@ $accent-light: #ff751d;
 
 $content-shadow-light: 0px 10px 60px 0px #aab2c533;
 
-$disabled-light: rgba($accent-light, 50%);
+$disabled-light: desaturate(lighten($accent-light, 20%), 20%);
 
 $top-light: #f5f6fb;
 $sub-light: #52555f;

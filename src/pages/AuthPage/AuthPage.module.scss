@@ -1,6 +1,8 @@
 @import "/src/sass/base/base.scss";
 
 .auth {
+    margin-top: 60px; 
+
 	flex: 1;
 
 	display: flex;
@@ -126,6 +128,8 @@
 
 @include desk() {
 	.auth {
+        margin-top: 0;
+
 		& > div {
 			flex-direction: row;
 			gap: 120px;

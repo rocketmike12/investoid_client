@@ -11,6 +11,8 @@
 }
 
 html {
+	overflow-x: hidden;
+
 	@include desk {
 		height: 100vh;
 		max-height: 100vh;
@@ -27,6 +29,8 @@ html {
 }
 
 body {
+	overflow-x: hidden;
+
 	font-family: Roboto;
 
 	@include desk {
