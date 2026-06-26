@@ -11,8 +11,10 @@
 }
 
 html {
-	height: 100vh;
-	max-height: 100vh;
+	@include desk {
+		height: 100vh;
+		max-height: 100vh;
+	}
 
 	&::-webkit-scrollbar {
 		background: $sub-light;
@@ -26,14 +28,20 @@ html {
 
 body {
 	font-family: Roboto;
-	height: 100vh;
-	max-height: 100vh;
+
+	@include desk {
+		height: 100vh;
+		max-height: 100vh;
+	}
 }
 
 #root {
-	height: 100vh;
-    display: flex;
-    flex-direction: column;
+	@include desk {
+		height: 100vh;
+		max-height: 100vh;
+	}
+	display: flex;
+	flex-direction: column;
 }
 
 @supports not selector(::-webkit-scrollbar) {

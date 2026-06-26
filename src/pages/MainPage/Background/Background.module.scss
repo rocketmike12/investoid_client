@@ -1,15 +1,18 @@
 @import "../../../sass/base/base.scss";
 
 .background {
-	height: 600px;
-
 	padding: 20px;
+
 	background-color: $bg-light;
 	border-radius: 30px;
 	box-shadow: $content-shadow-light;
 
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: space-between;
+}
+
+@include tab() {
+	.background {
+		min-height: 600px;
+	}
 }

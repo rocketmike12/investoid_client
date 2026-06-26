@@ -1,47 +1,62 @@
 @import "/src/sass/base/base.scss";
 
 .balance {
-	height: 44px;
-
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 	align-items: center;
-	gap: 20px;
+	gap: 15px;
 
 	&__label {
-		@include typography(inherit, 500, 12px, 2%, left);
+		@include typography(inherit, 500, 12px, 2%, center);
 		color: rgba($sub-light, 70%);
 	}
 
 	&__form {
-		height: 100%;
 		display: flex;
-		align-items: center;
-		gap: 20px;
+		flex-direction: column;
+		gap: 15px;
+		width: 100%;
+	}
+
+	&__balance,
+	&__confirm {
+		height: 44px;
+		width: 100%;
+
+		border-radius: 16px;
+
+		@include typography(inherit, 700, 12px, 2%, center);
 	}
 
 	&__balance {
-		width: 125px;
-		height: 100%;
-
-		border-radius: 16px;
 		border: 2px solid #ffffff;
 		background-color: transparent;
-
-		@include typography(inherit, 700, 12px, 2%, center);
 		color: $fg-light;
 	}
 
 	&__confirm {
-		width: 125px;
-		height: 100%;
 		background-color: transparent;
-
-		border-radius: 16px;
 		border: 2px solid #ffffff;
 
-		@include typography(inherit, 400, 12px, 2%, center);
 		text-transform: uppercase;
 		color: rgba($sub-light, 70%);
+	}
+}
+
+@include tab() {
+	.balance {
+		flex-direction: row;
+		justify-content: center;
+
+		&__form {
+			width: auto;
+			flex-direction: row;
+			align-items: center;
+		}
+
+		&__balance,
+		&__confirm {
+			width: 125px;
+		}
 	}
 }

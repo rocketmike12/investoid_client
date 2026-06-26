@@ -1,58 +1,42 @@
 @import "/src/sass/base/base.scss";
 
 .operation-form {
-	height: 45px;
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 15px;
+
+	margin-bottom: 30px;
 
 	&__calendar {
-		width: 20px;
-		height: 20px;
-		color: $sub-light;
-	}
-
-	&__input-wrap {
-		width: 601px;
-		height: 100%;
-		display: flex;
+		display: none;
 	}
 
 	&__date-input {
-		height: 100%;
-		width: 95px;
+		height: 45px;
 		padding: 10px;
 
-		display: flex;
-		justify-content: center;
-		align-items: center;
-
 		@include typography(inherit, 900, 12px, 4%, uppercase);
-		vertical-align: middle;
 		color: $sub-light;
 
 		&::placeholder {
 			@include typography(inherit, 400, 12px, 2%, uppercase);
-			vertical-align: middle;
 			color: #c7ccdc;
 		}
 	}
 
+	&__input-wrap {
+		display: flex;
+		flex-direction: column;
+		gap: 1px;
+	}
+
 	&__input {
-		height: 100%;
+		height: 45px;
 		padding-left: 20px;
 
 		@include typography(inherit, 900, 12px, 4%, uppercase);
-		vertical-align: middle;
 		color: $sub-light;
-
-		&:first-child {
-			border-radius: 16px 0 0 16px;
-		}
-
-		&:last-child {
-			border-radius: 0 16px 16px 0;
-		}
 
 		outline: 1px solid #c7ccdc;
 
@@ -62,7 +46,6 @@
 
 		&::placeholder {
 			@include typography(inherit, 400, 12px, 2%, uppercase);
-			vertical-align: middle;
 			color: #c7ccdc;
 		}
 
@@ -78,37 +61,97 @@
 		}
 	}
 
-	&__submit {
-		width: 125px;
-		height: 100%;
-		margin-left: 27px;
+	&__submit,
+	&__reset {
+		height: 45px;
 
 		border-radius: 16px;
 
 		@include typography(inherit, 700, 12px, 2%, center);
 		text-transform: uppercase;
+	}
+
+	&__submit {
 		background-color: $accent-light;
 		color: #ffffff;
 
 		&:disabled {
 			background-color: $disabled-light;
-			color: #ffffff;
 		}
 	}
 
 	&__reset {
-		width: 125px;
-		height: 100%;
-		margin-left: 15px;
-
-		border-radius: 16px;
-
-		@include typography(inherit, 700, 12px, 2%, center);
-		text-transform: uppercase;
 		border: 1px solid #c7ccdc;
 		background-color: transparent;
 		color: $button-fg-light;
 	}
+}
 
-	margin-bottom: 59px;
+@include tab() {
+	.operation-form {
+		&__input-wrap {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+
+		&__input {
+			flex: 1 1 250px;
+		}
+	}
+}
+
+@include desk() {
+	.operation-form {
+		height: 45px;
+
+		flex-direction: row;
+		align-items: center;
+		gap: 0;
+
+		margin-bottom: 59px;
+
+		&__calendar {
+			display: block;
+			width: 20px;
+			height: 20px;
+			color: $sub-light;
+		}
+
+		&__date-input {
+			width: 95px;
+			height: 100%;
+		}
+
+		&__input-wrap {
+			width: 601px;
+			height: 100%;
+
+			flex-direction: row;
+			flex-wrap: nowrap;
+		}
+
+		&__input {
+			height: 100%;
+
+			&:first-child {
+				border-radius: 16px 0 0 16px;
+			}
+
+			&:last-child {
+				border-radius: 0 16px 16px 0;
+			}
+		}
+
+		&__submit {
+			width: 125px;
+			height: 100%;
+			margin-left: 27px;
+		}
+
+		&__reset {
+			width: 125px;
+			height: 100%;
+			margin-left: 15px;
+		}
+	}
 }
