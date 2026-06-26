@@ -16,7 +16,6 @@ export const App = function () {
 
 	useEffect(() => {
 		session();
-		console.log(import.meta.env.DEV);
 	}, []);
 
 	return (

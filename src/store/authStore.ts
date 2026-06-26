@@ -35,7 +35,6 @@ export const useAuthStore = create<AuthState>((set) => ({
 	login: async (email, password) => {
 		try {
 			const { data } = await userApi.post("/login", { email: email, password: password }, { withCredentials: true });
-			console.log(data);
 
 			set({
 				isLogin: true,
@@ -82,7 +81,6 @@ export const useAuthStore = create<AuthState>((set) => ({
 	session: async () => {
 		try {
 			const { data } = await userApi.post("/session", "", { withCredentials: true });
-			console.log(data);
 
 			set({
 				isLogin: true,
@@ -100,8 +98,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 	},
 
 	logout: async () => {
-		const { data } = await userApi.post("/logout");
-		console.log(data);
+		await userApi.post("/logout");
 
 		set({
 			isLogin: false,
@@ -113,7 +110,6 @@ export const useAuthStore = create<AuthState>((set) => ({
 
 	setBalance: async (balance) => {
 		const { data } = await userApi.post("/balance", { balance: toMinor(balance) });
-		console.log(data);
 
 		set({
 			balance: data.balance,

@@ -21,10 +21,8 @@ export const AuthForm = function () {
 		const password = form.password.value;
 
 		if (authRole == "login") {
-			console.log(`login: ${email} ${password}`);
 			login(email, password);
 		} else {
-			console.log(`register: ${email} ${password}`);
 			register(email, password);
 		}
 

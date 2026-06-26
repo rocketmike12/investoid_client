@@ -58,9 +58,6 @@ export const Balance = function () {
 						onChange={(e) => {
 							const next = e.target.value;
 
-							console.log(next);
-							console.log(validateBalance(next));
-
 							if (next === "" || validateBalance(next)) {
 								setValue(next);
 							}
