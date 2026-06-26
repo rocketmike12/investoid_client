@@ -46,6 +46,16 @@
 		color: $sub-light;
 		border-bottom: 2px solid $top-light;
 
+        &:first-child {
+            border-left: 2px solid $top-light;
+        }
+
+        &:last-child {
+            border-right: 2px solid $top-light;
+        }
+	}
+
+	tbody tr:last-child td {
 		&:first-child {
 			border-bottom-left-radius: 20px;
 		}

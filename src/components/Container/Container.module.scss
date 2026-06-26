@@ -3,7 +3,6 @@
 .container {
 	width: 100%;
 	margin: 0 auto;
-	outline: 1px solid blue;
 
 	@include mob {
 		width: 320px;

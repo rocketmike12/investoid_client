@@ -1,9 +1,11 @@
 import { useAuthStore } from "../store/authStore";
+import { testOperations } from "./data";
 
 export const DebugOverlay = function () {
 	const isLogin = useAuthStore((state) => state.isLogin);
 	const email = useAuthStore((state) => state.email);
 	const operations = useAuthStore((state) => state.operations);
+	const addOperation = useAuthStore((state) => state.addOperation);
 
 	const state = useAuthStore((state) => state);
 
@@ -13,6 +15,10 @@ export const DebugOverlay = function () {
 
 	const logout = useAuthStore((state) => state.logout);
 
+	const addTestOperations = () => {
+		testOperations.forEach((operation) => addOperation(operation));
+	};
+
 	return (
 		<>
 			<div>
@@ -21,6 +27,7 @@ export const DebugOverlay = function () {
 				<p>operations: {JSON.stringify(operations)}</p>
 				<button onClick={consoleState}>console</button>
 				<button onClick={logout}>log out</button>
+				<button onClick={addTestOperations}>add test operations</button>
 			</div>
 		</>
 	);

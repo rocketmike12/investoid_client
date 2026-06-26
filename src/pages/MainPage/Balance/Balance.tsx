@@ -17,7 +17,7 @@ export const Balance = function () {
 		setValue(toMajor(balance).toFixed(2));
 	}, [balance]);
 
-	const validateBalance = (value: string): boolean => /^\d+(\.\d{0,2})?$/.test(value);
+	const validateBalance = (value: string): boolean => /^[+-]{0,1}\d*(\.\d{0,2})?$/.test(value);
 
 	const handleSubmit: SubmitEventHandler<HTMLFormElement> = async (e) => {
 		e.preventDefault();
@@ -25,6 +25,12 @@ export const Balance = function () {
 		const form = e.currentTarget as typeof e.currentTarget & {
 			balance: { value: string };
 		};
+
+		if (e.target.value === "") {
+			setValue("0.00");
+		}
+
+		setValue(Number.parseFloat(value).toFixed(2));
 
 		const ok = await confirm("This will erase all current records. Are you sure?");
 		if (!ok) {
@@ -51,6 +57,9 @@ export const Balance = function () {
 						value={value}
 						onChange={(e) => {
 							const next = e.target.value;
+
+							console.log(next);
+							console.log(validateBalance(next));
 
 							if (next === "" || validateBalance(next)) {
 								setValue(next);
