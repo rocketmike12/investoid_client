@@ -11,7 +11,7 @@ export const Loader = function () {
 		<>
 			{isLoading && (
 				<div className={styles["backdrop"]}>
-					<ClipLoader loading color="#ff751d" />
+					<ClipLoader loading color="#ff751d" size={"100px"} />
 				</div>
 			)}
 		</>

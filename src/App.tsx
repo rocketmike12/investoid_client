@@ -4,6 +4,8 @@ import { useAuthStore } from "./store/authStore";
 
 import { Routes, Route } from "react-router";
 
+import { Loader } from "./components/Loader/Loader";
+
 import { AuthPage } from "./pages/AuthPage/AuthPage";
 import { MainPage } from "./pages/MainPage/MainPage";
 
@@ -20,6 +22,7 @@ export const App = function () {
 
 	return (
 		<>
+			<Loader />
 			<Routes>
 				<Route path="/" element={stateIsLogin ? <MainPage /> : <AuthPage />} />
 			</Routes>
