@@ -10,8 +10,6 @@ import { Background } from "./Background/Background";
 import { AddOperation } from "./AddOperation/AddOperation";
 import { Operations } from "./Operations/Operations";
 
-import { ConfirmModal } from "../../components/ConfirmModal/ConfirmModal";
-
 import styles from "./MainPage.module.scss";
 
 export const MainPage = function () {
@@ -19,8 +17,6 @@ export const MainPage = function () {
 
 	return (
 		<>
-			<ConfirmModal />
-
 			<button
 				className={styles["add-button"]}
 				onClick={() => {
