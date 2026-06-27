@@ -1,12 +1,12 @@
 import { useEffect, useMemo, useState } from "react";
 import { useAuthStore } from "../../store/authStore";
-import { getAnalytics } from "./helpers";
+import { getAnalytics, useWindowDimensions } from "./helpers";
 
 import { Link } from "react-router";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList } from "recharts";
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList } from "recharts";
 
 import { Container } from "../../components/Container/Container";
 import { Header } from "../../components/Header/Header";
@@ -41,6 +41,8 @@ export const AnalyticsPage = () => {
 	type Category = (typeof categories)[number];
 
 	const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+
+	const { width } = useWindowDimensions();
 
 	if (!monthData) {
 		return (
@@ -154,44 +156,97 @@ export const AnalyticsPage = () => {
 						</ul>
 
 						{selectedCategory && monthData?.categories?.[selectedCategory] && (
-							<ResponsiveContainer width="100%" height={320}>
-								<BarChart
-									layout="vertical"
-									data={Object.entries(monthData.categories[selectedCategory].subcategories || {})
-										.map(([name, sum]) => ({
-											name,
-											sum: Math.abs(sum)
-										}))
-										.sort((a, b) => b.sum - a.sum)}
-									margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
-									barSize={18}
-								>
-									<CartesianGrid strokeDasharray="3 3" />
+							<>
+								{width < 768 ? (
+									<ResponsiveContainer width="100%" height={320}>
+										<BarChart
+											layout="vertical"
+											data={Object.entries(monthData.categories[selectedCategory].subcategories || {})
+												.map(([name, sum]) => ({
+													name,
+													sum: Math.abs(sum)
+												}))
+												.sort((a, b) => b.sum - a.sum)}
+											margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
+											barSize={18}
+										>
+											<CartesianGrid strokeDasharray="3 3" />
 
-									<XAxis type="number" fontSize={12} />
+											<XAxis type="number" fontSize={12} />
 
-									<YAxis type="category" dataKey="name" hide padding={{ top: 10, bottom: 10 }} />
+											<YAxis type="category" dataKey="name" hide padding={{ top: 10, bottom: 10 }} />
 
-									<Tooltip
-										wrapperStyle={{
-											fontSize: "12px",
-											fontWeight: 700
-										}}
-									/>
+											<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[0, 10, 10, 0]}>
+												<LabelList
+													dataKey="name"
+													content={(props: any) => {
+														const { x, y, value } = props;
 
-									<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[0, 10, 10, 0]}>
-										<LabelList
-											dataKey="name"
-											position="insideLeft"
-											style={{
-												fill: "#000000",
-												fontSize: 12,
-												fontWeight: 400
-											}}
-										/>
-									</Bar>
-								</BarChart>
-							</ResponsiveContainer>
+														return (
+															<text x={x} y={y - 5} fill="#000000" fontSize={12} fontWeight={400}>
+																{value}
+															</text>
+														);
+													}}
+												/>
+
+												<LabelList
+													dataKey="sum"
+													content={(props: any) => {
+														const { x, y, value } = props;
+
+														return (
+															<text x={x} y={y + 30} fill="#000000" fontSize={12} fontWeight={400}>
+																{value.toFixed(2)}
+															</text>
+														);
+													}}
+												/>
+											</Bar>
+										</BarChart>
+									</ResponsiveContainer>
+								) : (
+									<ResponsiveContainer width="100%" height={320}>
+										<BarChart
+											layout="horizontal"
+											data={Object.entries(monthData.categories[selectedCategory].subcategories || {})
+												.map(([name, sum]) => ({
+													name,
+													sum: Math.abs(sum)
+												}))
+												.sort((a, b) => b.sum - a.sum)}
+											margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
+											barSize={18}
+										>
+											<CartesianGrid strokeDasharray="3 3" />
+
+											<XAxis type="category" dataKey="name" fontSize={12} />
+
+											<YAxis type="number" hide />
+
+											<Tooltip
+												wrapperStyle={{
+													fontSize: "12px",
+													fontWeight: 700
+												}}
+											/>
+
+											<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[10, 10, 0, 0]}>
+												<LabelList
+													dataKey="sum"
+													position="top"
+													style={{
+														fill: "#000000",
+														fontSize: 12,
+														fontWeight: 400
+													}}
+													formatter={(value: any) => Number(value).toFixed(2)}
+												/>
+											</Bar>
+										</BarChart>
+									</ResponsiveContainer>
+								)}
+							</>
 						)}
 					</div>
 				</Container>

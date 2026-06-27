@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import type { Operation } from "../../store/types";
 import { toMajor } from "../../utils/money";
 
@@ -74,9 +76,7 @@ export const getAnalytics = function (operations: Operation[]): AnalyticsData[] 
 		totals[key].categories[catKey].subcategories[subKey] += major;
 	}
 
-	return Object.values(totals).sort((a, b) =>
-		a.key.localeCompare(b.key)
-	);
+	return Object.values(totals).sort((a, b) => a.key.localeCompare(b.key));
 };
 
 export const formatMonthKey = function (key: string) {
@@ -88,4 +88,27 @@ export const formatMonthKey = function (key: string) {
 			year: "numeric"
 		})
 		.toLowerCase();
+};
+
+function getWindowDimensions() {
+	const { innerWidth: width, innerHeight: height } = window;
+	return {
+		width,
+		height
+	};
+}
+
+export const useWindowDimensions = function () {
+	const [windowDimensions, setWindowDimensions] = useState(getWindowDimensions());
+
+	useEffect(() => {
+		function handleResize() {
+			setWindowDimensions(getWindowDimensions());
+		}
+
+		window.addEventListener("resize", handleResize);
+		return () => window.removeEventListener("resize", handleResize);
+	}, []);
+
+	return windowDimensions;
 };
