@@ -6,6 +6,8 @@ import { Link } from "react-router";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, LabelList } from "recharts";
+
 import { Container } from "../../components/Container/Container";
 import { Header } from "../../components/Header/Header";
 import { Balance } from "../../components/Balance/Balance";
@@ -59,6 +61,8 @@ export const AnalyticsPage = () => {
 			</>
 		);
 	}
+
+	console.log(Object.entries(monthData.categories[selectedCategory || "food"].subcategories).map((el) => ({ name: el[0], amt: el[1] })));
 
 	return (
 		<>
@@ -148,6 +152,47 @@ export const AnalyticsPage = () => {
 									</li>
 								))}
 						</ul>
+
+						{selectedCategory && monthData?.categories?.[selectedCategory] && (
+							<ResponsiveContainer width="100%" height={320}>
+								<BarChart
+									layout="vertical"
+									data={Object.entries(monthData.categories[selectedCategory].subcategories || {})
+										.map(([name, sum]) => ({
+											name,
+											sum: Math.abs(sum)
+										}))
+										.sort((a, b) => b.sum - a.sum)}
+									margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
+									barSize={18}
+								>
+									<CartesianGrid strokeDasharray="3 3" />
+
+									<XAxis type="number" fontSize={12} />
+
+									<YAxis type="category" dataKey="name" hide padding={{ top: 10, bottom: 10 }} />
+
+									<Tooltip
+										wrapperStyle={{
+											fontSize: "12px",
+											fontWeight: 700
+										}}
+									/>
+
+									<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[0, 10, 10, 0]}>
+										<LabelList
+											dataKey="name"
+											position="insideLeft"
+											style={{
+												fill: "#000000",
+												fontSize: 12,
+												fontWeight: 400
+											}}
+										/>
+									</Bar>
+								</BarChart>
+							</ResponsiveContainer>
+						)}
 					</div>
 				</Container>
 			</main>
