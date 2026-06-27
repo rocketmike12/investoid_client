@@ -1,5 +1,5 @@
 import { useAuthStore } from "../store/authStore";
-import { testOperations } from "./data";
+import { mockOperations } from "./data";
 
 export const DebugOverlay = function () {
 	const isLogin = useAuthStore((state) => state.isLogin);
@@ -15,8 +15,8 @@ export const DebugOverlay = function () {
 
 	const logout = useAuthStore((state) => state.logout);
 
-	const addTestOperations = () => {
-		testOperations.forEach((operation) => addOperation(operation));
+	const addMockOperations = () => {
+		mockOperations.forEach((operation) => addOperation(operation));
 	};
 
 	return (
@@ -27,7 +27,7 @@ export const DebugOverlay = function () {
 				<p>operations: {JSON.stringify(operations)}</p>
 				<button onClick={consoleState}>console</button>
 				<button onClick={logout}>log out</button>
-				<button onClick={addTestOperations}>add test operations</button>
+				<button onClick={addMockOperations}>add test operations</button>
 			</div>
 		</>
 	);

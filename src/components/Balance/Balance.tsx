@@ -26,11 +26,11 @@ export const Balance = function () {
 			balance: { value: string };
 		};
 
-		if (e.target.value === "") {
+		if (form.balance.value === "") {
 			setValue("0.00");
 		}
 
-		setValue(Number.parseFloat(value).toFixed(2));
+		setValue(Number.parseFloat(form.balance.value === "" ? "0" : form.balance.value).toFixed(2));
 
 		const ok = await confirm("This will erase all current records. Are you sure?");
 		if (!ok) {
@@ -62,8 +62,8 @@ export const Balance = function () {
 								setValue(next);
 							}
 						}}
-						onBlur={(e) => {
-							if (e.target.value === "") {
+						onBlur={() => {
+							if (value === "") {
 								setValue("0.00");
 								return;
 							}
