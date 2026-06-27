@@ -1,5 +1,9 @@
 import { useState } from "react";
 
+import { Link } from "react-router";
+
+import { MdBarChart } from "react-icons/md";
+
 import { Header } from "../../components/Header/Header";
 import { Balance } from "./Balance/Balance";
 import { Background } from "./Background/Background";
@@ -28,7 +32,15 @@ export const MainPage = function () {
 
 			<Header />
 			<main className={styles["main"]}>
-				<Balance />
+				<div className={styles["main__top-wrap"]}>
+					<Balance />
+					<div className={styles["main__analytics"]}>
+						<Link to="/analytics" className={styles["main__analytics__link"]}>
+							View analytics
+						</Link>
+						<MdBarChart className={styles["main__analytics__icon"]} />
+					</div>
+				</div>
 				<Background>
 					<AddOperation isVisible={isVisible} />
 					<Operations />
