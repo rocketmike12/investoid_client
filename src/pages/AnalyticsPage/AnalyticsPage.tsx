@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { IoArrowBackSharp } from "react-icons/io5";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
-import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, LabelList } from "recharts";
+import { ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid, LabelList } from "recharts";
 
 import { Container } from "../../components/Container/Container";
 import { Header } from "../../components/Header/Header";
@@ -167,7 +167,7 @@ export const AnalyticsPage = () => {
 													sum: Math.abs(sum)
 												}))
 												.sort((a, b) => b.sum - a.sum)}
-											margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
+											margin={{ top: 20, bottom: 0, left: 20, right: 20 }}
 											barSize={18}
 										>
 											<CartesianGrid strokeDasharray="3 3" />
@@ -215,7 +215,7 @@ export const AnalyticsPage = () => {
 													sum: Math.abs(sum)
 												}))
 												.sort((a, b) => b.sum - a.sum)}
-											margin={{ top: 20, bottom: 20, left: 20, right: 20 }}
+											margin={{ top: 20, bottom: 0, left: 20, right: 20 }}
 											barSize={18}
 										>
 											<CartesianGrid strokeDasharray="3 3" />
@@ -223,13 +223,6 @@ export const AnalyticsPage = () => {
 											<XAxis type="category" dataKey="name" fontSize={12} />
 
 											<YAxis type="number" hide />
-
-											<Tooltip
-												wrapperStyle={{
-													fontSize: "12px",
-													fontWeight: 700
-												}}
-											/>
 
 											<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[10, 10, 0, 0]}>
 												<LabelList

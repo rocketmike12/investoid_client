@@ -12,7 +12,7 @@
 	align-items: center;
 	gap: 20px;
 
-	& > div {
+	& > div:not(&__top-wrap) {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
@@ -70,13 +70,12 @@
 		width: 160px;
 
 		display: flex;
-        justify-content: space-between;
+		justify-content: space-between;
 		align-items: center;
 		gap: 15px;
 
 		@include typography(inherit, 700, 14px, 2%, center);
 		text-transform: uppercase;
-
 
 		&__decrement,
 		&__increment {
@@ -161,6 +160,7 @@
 		flex-direction: column;
 		align-items: center;
 
+		border-radius: 20px;
 		box-shadow: $content-shadow-light;
 
 		background-color: $bg-light;
@@ -219,15 +219,8 @@
 		margin: 30px 0;
 		gap: 30px;
 
-		&__back {
-			position: static;
-
-			grid-column: 1;
-			justify-self: start;
-
-			&__text {
-				display: block;
-			}
+		&__back__text {
+			display: block;
 		}
 	}
 }
@@ -236,6 +229,24 @@
 	.analytics {
 		margin: 40px 0;
 		gap: 40px;
+
+		&__top-wrap {
+			display: grid;
+			grid-template-columns: 160px 1fr 160px;
+			align-items: center;
+		}
+
+		&__back {
+			position: static;
+
+			grid-column: 1;
+			justify-self: start;
+		}
+
+		&__month {
+			grid-column: 3;
+			justify-self: end;
+		}
 	}
 
 	.add-button {
