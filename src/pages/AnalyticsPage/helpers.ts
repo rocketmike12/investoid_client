@@ -5,7 +5,7 @@ export type AnalyticsData = {
 	key: string;
 	sum: number;
 	expenses: number;
-	profits: number;
+	incomes: number;
 	categories: Record<
 		string,
 		{
@@ -28,72 +28,55 @@ export const getMonthList = function (operations: Operation[]): string[] {
 };
 
 export const getAnalytics = function (operations: Operation[]): AnalyticsData[] {
-	const totals: Record<
-		string,
-		{
-			sum: number;
-			expenses: number;
-			profits: number;
-			categories: Record<
-				string,
-				{
-					sum: number;
-					subcategories: Record<string, number>;
-				}
-			>;
-		}
-	> = {};
+	const totals: Record<string, AnalyticsData> = {};
 
-	for (const operation of operations) {
-		const [, month, year] = operation.date.split(".");
-
+	for (const op of operations) {
+		const [, month, year] = op.date.split(".");
 		const key = `${year}-${month}`;
 
-		if (totals[key]) continue;
-
-		const expenses = operations.filter((el) => el.date.split(".")[1] === month).reduce((acc, val) => acc + (val.sum < 0 ? toMajor(val.sum) : 0), 0);
-		const profits = operations.filter((el) => el.date.split(".")[1] === month).reduce((acc, val) => acc + (val.sum > 0 ? toMajor(val.sum) : 0), 0);
-
-		const categories: Record<
-			string,
-			{
-				sum: number;
-				subcategories: Record<string, number>;
-			}
-		> = {};
-
-		for (const operation of operations) {
-			const key = operation.category.toLowerCase();
-			if (categories[key]) continue;
-
-			let sum = 0;
-
-			const subcategories: Record<string, number> = {};
-
-			for (const operation of operations) {
-				const key = operation.subcategory;
-
-				if (subcategories[key]) {
-					subcategories[key] += toMajor(operation.sum);
-				} else {
-					subcategories[key] == toMajor(operation.sum);
-				}
-
-				sum += toMajor(operation.sum);
-			}
+		if (!totals[key]) {
+			totals[key] = {
+				key,
+				sum: 0,
+				expenses: 0,
+				incomes: 0,
+				categories: {}
+			};
 		}
 
-		totals[key] ??= {
-			sum: expenses + profits,
-			expenses,
-			profits,
-			categories
-		};
+		const major = toMajor(op.sum);
+
+		totals[key].sum += major;
+
+		if (op.sum < 0) {
+			totals[key].expenses += major;
+		} else {
+			totals[key].incomes += major;
+		}
+
+		const catKey = op.category.toLowerCase();
+
+		if (!totals[key].categories[catKey]) {
+			totals[key].categories[catKey] = {
+				sum: 0,
+				subcategories: {}
+			};
+		}
+
+		totals[key].categories[catKey].sum += major;
+
+		const subKey = op.subcategory;
+
+		if (!totals[key].categories[catKey].subcategories[subKey]) {
+			totals[key].categories[catKey].subcategories[subKey] = 0;
+		}
+
+		totals[key].categories[catKey].subcategories[subKey] += major;
 	}
 
-	return Object.entries(totals)
-		.map(([key, total]) => ({ key, sum: total.sum, expenses: total.expenses, profits: total.profits, categories: total.categories }))
-		.sort((a, b) => b.key.localeCompare(a.key));
+	return Object.values(totals).sort((a, b) =>
+		a.key.localeCompare(b.key)
+	);
 };
 
 export const formatMonthKey = function (key: string) {

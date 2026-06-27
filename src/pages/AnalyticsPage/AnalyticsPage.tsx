@@ -1,55 +1,155 @@
-import { useState } from "react";
-
+import { useEffect, useMemo, useState } from "react";
 import { useAuthStore } from "../../store/authStore";
-
-import { getMonthList, getAnalytics } from "./helpers";
+import { getAnalytics } from "./helpers";
 
 import { Link } from "react-router";
-
 import { IoArrowBackSharp } from "react-icons/io5";
 import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 
+import { Container } from "../../components/Container/Container";
 import { Header } from "../../components/Header/Header";
 import { Balance } from "../../components/Balance/Balance";
 
 import styles from "./AnalyticsPage.module.scss";
 
-export const AnalyticsPage = function () {
+export const AnalyticsPage = () => {
 	const operations = useAuthStore((state) => state.operations);
-	const months = getMonthList(operations);
+
+	const analyticsData = useMemo(() => getAnalytics(operations), [operations]);
 
 	const [currentMonth, setCurrentMonth] = useState(0);
 
-	console.log(getAnalytics(operations));
+	useEffect(() => {
+		if (analyticsData.length) {
+			setCurrentMonth(analyticsData.length - 1);
+		}
+	}, [analyticsData]);
+
+	const monthData = analyticsData.length > 0 ? analyticsData[((currentMonth % analyticsData.length) + analyticsData.length) % analyticsData.length] : null;
+
+	type Mode = "income" | "expenses";
+
+	const [mode, setMode] = useState<Mode>("income");
+
+	const toggleMode = () => {
+		setMode((prev) => (prev === "income" ? "expenses" : "income"));
+	};
+
+	const categories = operations.map((op) => op.category);
+	type Category = (typeof categories)[number];
+
+	const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
+
+	if (!monthData) {
+		return (
+			<>
+				<Header />
+				<main className={styles["analytics"]}>
+					<div className={styles["analytics__top-wrap"]}>
+						<Link to="/" className={styles["analytics__back"]}>
+							<IoArrowBackSharp />
+							<span>Go back</span>
+						</Link>
+
+						<Balance />
+					</div>
+
+					<p>No analytics yet.</p>
+				</main>
+			</>
+		);
+	}
 
 	return (
 		<>
 			<Header />
+
 			<main className={styles["analytics"]}>
 				<div className={styles["analytics__top-wrap"]}>
 					<Link to="/" className={styles["analytics__back"]}>
 						<IoArrowBackSharp className={styles["analytics__back__icon"]} />
 						<span className={styles["analytics__back__text"]}>Go back</span>
 					</Link>
-					<div className="analytics__month">
+
+					<div className={styles["analytics__month"]}>
 						<button
 							onClick={() => {
-								setCurrentMonth(currentMonth - 1);
+								setCurrentMonth((m) => m - 1);
 							}}
+							className={styles["analytics__month__decrement"]}
 						>
-							<IoIosArrowBack />
+							<IoIosArrowBack className={styles["analytics__month__decrement__icon"]} />
 						</button>
-						<span>{months[currentMonth % months.length]}</span>
+
+						<span>{monthData.key}</span>
+
 						<button
 							onClick={() => {
-								setCurrentMonth(currentMonth + 1);
+								setCurrentMonth((m) => m + 1);
 							}}
+							className={styles["analytics__month__increment"]}
 						>
-							<IoIosArrowForward />
+							<IoIosArrowForward className={styles["analytics__month__increment__icon"]} />
 						</button>
 					</div>
+
 					<Balance />
 				</div>
+
+				<Container>
+					<div className={styles["analytics__summary"]}>
+						<div className={styles["analytics__summary__expenses"]}>
+							<p className={styles["analytics__summary__expenses__title"]}>Expenses</p>
+							<p className={styles["analytics__summary__expenses__sum"]}>{monthData.expenses.toFixed(2)}</p>
+						</div>
+
+						<div className={styles["analytics__summary__income"]}>
+							<p className={styles["analytics__summary__income__title"]}>Income</p>
+							<p className={styles["analytics__summary__income__sum"]}>+{monthData.incomes.toFixed(2)}</p>
+						</div>
+					</div>
+
+					<div className={styles["analytics__bottom-wrap"]}>
+						<div className={styles["analytics__mode"]}>
+							<button
+								onClick={() => {
+									toggleMode();
+								}}
+								className={styles["analytics__mode__decrement"]}
+							>
+								<IoIosArrowBack className={styles["analytics__mode__decrement__icon"]} />
+							</button>
+
+							<span>{mode}</span>
+
+							<button
+								onClick={() => {
+									toggleMode();
+								}}
+								className={styles["analytics__mode__increment"]}
+							>
+								<IoIosArrowForward className={styles["analytics__mode__increment__icon"]} />
+							</button>
+						</div>
+
+						<ul className={styles["analytics__categories"]}>
+							{Object.entries(monthData.categories)
+								.filter((el) => (el[1].sum > 0 && mode == "income") || (el[1].sum < 0 && mode == "expenses"))
+								.map((el) => (
+									<li
+										key={el[0]}
+										onClick={() => {
+											setSelectedCategory(el[0]);
+										}}
+										className={`${styles["analytics__categories__item"]} ${styles["selected"]}`}
+									>
+										<span>{el[0]}</span>
+										<span>{(el[1].sum > 0 ? "+" : "") + el[1].sum.toFixed(2)}</span>
+									</li>
+								))}
+						</ul>
+					</div>
+				</Container>
 			</main>
 		</>
 	);
