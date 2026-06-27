@@ -1,3 +1,4 @@
+
 import { Container } from "../../components/Container/Container";
 import { Header } from "../../components/Header/Header";
 import { AuthForm } from "./AuthForm/AuthForm";
@@ -5,6 +6,7 @@ import { AuthForm } from "./AuthForm/AuthForm";
 import styles from "./AuthPage.module.scss";
 
 export const AuthPage = function () {
+
 	return (
 		<>
 			<Header />

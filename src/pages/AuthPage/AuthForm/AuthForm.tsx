@@ -1,10 +1,12 @@
 import { useState, type SubmitEventHandler } from "react";
-
+import { useNavigate } from "react-router";
 import { useAuthStore } from "../../../store/authStore";
 
 import styles from "../AuthPage.module.scss";
 
 export const AuthForm = function () {
+	const navigate = useNavigate();
+
 	const [authRole, setAuthRole] = useState<"login" | "register">("login");
 
 	const login = useAuthStore((state) => state.login);
@@ -25,6 +27,8 @@ export const AuthForm = function () {
 		} else {
 			register(email, password);
 		}
+
+		navigate("/");
 
 		form.reset();
 	};
