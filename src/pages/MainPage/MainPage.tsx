@@ -34,12 +34,10 @@ export const MainPage = function () {
 			<main className={styles["main"]}>
 				<div className={styles["main__top-wrap"]}>
 					<Balance />
-					<div className={styles["main__analytics"]}>
-						<Link to="/analytics" className={styles["main__analytics__link"]}>
-							View analytics
-						</Link>
+					<Link to="/analytics" className={styles["main__analytics"]}>
+						<span className={styles["main__analytics__text"]}>View analytics</span>
 						<MdBarChart className={styles["main__analytics__icon"]} />
-					</div>
+					</Link>
 				</div>
 				<Background>
 					<AddOperation isVisible={isVisible} />

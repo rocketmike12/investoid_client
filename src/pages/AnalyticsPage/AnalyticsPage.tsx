@@ -13,12 +13,10 @@ export const AnalyticsPage = function () {
 			<Header />
 			<main className={styles["analytics"]}>
 				<div className={styles["analytics__top-wrap"]}>
-					<div className={styles["analytics__back"]}>
-						<Link to="/" className={styles["analytics__back__link"]}>
-							<IoArrowBackSharp className={styles["analytics__back__icon"]} />
-							<span className={styles["analytics__back__link__text"]}>Go back</span>
-						</Link>
-					</div>
+					<Link to="/" className={styles["analytics__back"]}>
+						<IoArrowBackSharp className={styles["analytics__back__icon"]} />
+						<span className={styles["analytics__back__text"]}>Go back</span>
+					</Link>
 					<Balance />
 				</div>
 			</main>

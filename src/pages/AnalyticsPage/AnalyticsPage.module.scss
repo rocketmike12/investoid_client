@@ -38,26 +38,24 @@
 		top: 0;
 		left: 20px;
 
+		@include typography(inherit, 400, 12px, 4%, right);
+		color: rgba($sub-light, 70%);
+
+		display: flex;
+		align-items: center;
+		gap: 15px;
+
 		&__icon {
 			width: 20px;
 			height: 20px;
 			color: rgba($sub-light, 70%);
 		}
 
-		&__link {
+		&__text {
+			display: none;
+
 			@include typography(inherit, 400, 12px, 4%, right);
 			color: rgba($sub-light, 70%);
-
-			display: flex;
-			align-items: center;
-			gap: 15px;
-
-			&__text {
-				display: none;
-
-				@include typography(inherit, 400, 12px, 4%, right);
-				color: rgba($sub-light, 70%);
-			}
 		}
 	}
 }
@@ -96,7 +94,7 @@
 			grid-column: 1;
 			justify-self: start;
 
-			&__link__text {
+			&__text {
 				display: block;
 			}
 		}

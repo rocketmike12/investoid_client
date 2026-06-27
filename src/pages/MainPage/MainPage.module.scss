@@ -39,7 +39,7 @@
 		align-items: center;
 		gap: 15px;
 
-		&__link {
+		&__text {
 			@include typography(inherit, 400, 12px, 4%, right);
 			color: rgba($sub-light, 70%);
 		}
