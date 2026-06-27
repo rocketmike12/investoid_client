@@ -1,0 +1,117 @@
+@import "/src/sass/base/base.scss";
+
+.analytics {
+	position: relative;
+
+	margin: 20px 0;
+
+	flex: 1;
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 25px;
+
+	&__top-wrap {
+		width: 320px;
+
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 25px;
+
+		@include tab {
+			width: 436px;
+		}
+
+		@include desk {
+			width: 1060px;
+
+			display: grid;
+			grid-template-columns: 1fr auto 1fr;
+			align-items: center;
+		}
+	}
+
+	&__back {
+		position: absolute;
+		top: 0;
+		left: 20px;
+
+		&__icon {
+			width: 20px;
+			height: 20px;
+			color: rgba($sub-light, 70%);
+		}
+
+		&__link {
+			@include typography(inherit, 400, 12px, 4%, right);
+			color: rgba($sub-light, 70%);
+
+			display: flex;
+			align-items: center;
+			gap: 15px;
+
+			&__text {
+				display: none;
+
+				@include typography(inherit, 400, 12px, 4%, right);
+				color: rgba($sub-light, 70%);
+			}
+		}
+	}
+}
+
+.add-button {
+	position: fixed;
+	bottom: 20px;
+	right: 20px;
+
+	z-index: 3;
+
+	width: 44px;
+	height: 44px;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 50%;
+
+	@include typography(inherit, 400, 20px, 2%, center);
+
+	background-color: $accent-light;
+	color: $bg-light;
+	box-shadow: $button-shadow-light;
+}
+
+@include tab() {
+	.analytics {
+		margin: 30px 0;
+		gap: 30px;
+
+		&__back {
+			position: static;
+
+			grid-column: 1;
+			justify-self: start;
+
+			&__link__text {
+				display: block;
+			}
+		}
+	}
+}
+
+@include desk() {
+	.analytics {
+		margin: 40px 0;
+		gap: 40px;
+	}
+
+	.add-button {
+		display: none;
+		pointer-events: none;
+		opacity: 0;
+	}
+}

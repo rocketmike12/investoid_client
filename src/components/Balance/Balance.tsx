@@ -1,9 +1,9 @@
 import { useEffect, useState, type SubmitEventHandler } from "react";
 
-import { useAuthStore } from "../../../store/authStore";
-import { confirm } from "../../../store/helpers";
+import { useAuthStore } from "../../store/authStore";
+import { confirm } from "../../store/helpers";
 
-import { toMajor } from "../../../utils/money";
+import { toMajor } from "../../utils/money";
 
 import styles from "./Balance.module.scss";
 

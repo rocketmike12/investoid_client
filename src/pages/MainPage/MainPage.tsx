@@ -5,7 +5,7 @@ import { Link } from "react-router";
 import { MdBarChart } from "react-icons/md";
 
 import { Header } from "../../components/Header/Header";
-import { Balance } from "./Balance/Balance";
+import { Balance } from "../../components/Balance/Balance";
 import { Background } from "./Background/Background";
 import { AddOperation } from "./AddOperation/AddOperation";
 import { Operations } from "./Operations/Operations";
