@@ -189,6 +189,11 @@
 			@include typography(inherit, 500, 12px, 2%, center);
 			text-transform: uppercase;
 			color: $sub-light;
+
+            &.selected {
+                color: $accent-light; 
+                border-color: $accent-light;
+            }
 		}
 	}
 }

@@ -145,7 +145,7 @@ export const AnalyticsPage = () => {
 										onClick={() => {
 											setSelectedCategory(el[0]);
 										}}
-										className={`${styles["analytics__categories__item"]} ${styles["selected"]}`}
+										className={`${styles["analytics__categories__item"]} ${el[0] == selectedCategory ? styles["selected"] : ""}`}
 									>
 										<span>{el[0]}</span>
 										<span>{(el[1].sum > 0 ? "+" : "") + el[1].sum.toFixed(2)}</span>
