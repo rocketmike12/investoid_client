@@ -39,6 +39,8 @@
 		align-items: center;
 		gap: 15px;
 
+		color: rgba($sub-light, 70%);
+
 		&__text {
 			@include typography(inherit, 400, 12px, 4%, right);
 			color: rgba($sub-light, 70%);
