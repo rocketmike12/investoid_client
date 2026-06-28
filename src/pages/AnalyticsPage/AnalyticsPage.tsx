@@ -64,8 +64,6 @@ export const AnalyticsPage = () => {
 		);
 	}
 
-	console.log(Object.entries(monthData.categories[selectedCategory || "food"].subcategories).map((el) => ({ name: el[0], amt: el[1] })));
-
 	return (
 		<>
 			<Header />
@@ -155,92 +153,94 @@ export const AnalyticsPage = () => {
 								))}
 						</ul>
 
-						{selectedCategory && monthData?.categories?.[selectedCategory] && (
-							<>
-								{width < 768 ? (
-									<ResponsiveContainer width="100%" height={320}>
-										<BarChart
-											layout="vertical"
-											data={Object.entries(monthData.categories[selectedCategory].subcategories || {})
-												.map(([name, sum]) => ({
-													name,
-													sum: Math.abs(sum)
-												}))
-												.sort((a, b) => b.sum - a.sum)}
-											margin={{ top: 20, bottom: 0, left: 20, right: 20 }}
-											barSize={18}
-										>
-											<CartesianGrid strokeDasharray="3 3" />
+						<div className={styles["chart-wrap"]}>
+							{selectedCategory && monthData?.categories?.[selectedCategory] && (
+								<>
+									{width < 768 ? (
+										<ResponsiveContainer width="100%" height={320}>
+											<BarChart
+												layout="vertical"
+												data={Object.entries(monthData.categories[selectedCategory].subcategories || {})
+													.map(([name, sum]) => ({
+														name,
+														sum: Math.abs(sum)
+													}))
+													.sort((a, b) => b.sum - a.sum)}
+												margin={{ top: 20, bottom: 0, left: 20, right: 20 }}
+												barSize={18}
+											>
+												<CartesianGrid strokeDasharray="3 3" />
 
-											<XAxis type="number" fontSize={12} />
+												<XAxis type="number" fontSize={12} />
 
-											<YAxis type="category" dataKey="name" hide padding={{ top: 10, bottom: 10 }} />
+												<YAxis type="category" dataKey="name" hide padding={{ top: 10, bottom: 10 }} />
 
-											<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[0, 10, 10, 0]}>
-												<LabelList
-													dataKey="name"
-													content={(props: any) => {
-														const { x, y, value } = props;
+												<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[0, 10, 10, 0]}>
+													<LabelList
+														dataKey="name"
+														content={(props: any) => {
+															const { x, y, value } = props;
 
-														return (
-															<text x={x} y={y - 5} fill="#000000" fontSize={12} fontWeight={400}>
-																{value}
-															</text>
-														);
-													}}
-												/>
+															return (
+																<text x={x} y={y - 5} fill="#000000" fontSize={12} fontWeight={400}>
+																	{value}
+																</text>
+															);
+														}}
+													/>
 
-												<LabelList
-													dataKey="sum"
-													content={(props: any) => {
-														const { x, y, value } = props;
+													<LabelList
+														dataKey="sum"
+														content={(props: any) => {
+															const { x, y, value } = props;
 
-														return (
-															<text x={x} y={y + 30} fill="#000000" fontSize={12} fontWeight={400}>
-																{value.toFixed(2)}
-															</text>
-														);
-													}}
-												/>
-											</Bar>
-										</BarChart>
-									</ResponsiveContainer>
-								) : (
-									<ResponsiveContainer width="100%" height={320}>
-										<BarChart
-											layout="horizontal"
-											data={Object.entries(monthData.categories[selectedCategory].subcategories || {})
-												.map(([name, sum]) => ({
-													name,
-													sum: Math.abs(sum)
-												}))
-												.sort((a, b) => b.sum - a.sum)}
-											margin={{ top: 20, bottom: 0, left: 20, right: 20 }}
-											barSize={18}
-										>
-											<CartesianGrid strokeDasharray="3 3" />
+															return (
+																<text x={x} y={y + 30} fill="#000000" fontSize={12} fontWeight={400}>
+																	{value.toFixed(2)}
+																</text>
+															);
+														}}
+													/>
+												</Bar>
+											</BarChart>
+										</ResponsiveContainer>
+									) : (
+										<ResponsiveContainer width="100%" height={320}>
+											<BarChart
+												layout="horizontal"
+												data={Object.entries(monthData.categories[selectedCategory].subcategories || {})
+													.map(([name, sum]) => ({
+														name,
+														sum: Math.abs(sum)
+													}))
+													.sort((a, b) => b.sum - a.sum)}
+												margin={{ top: 20, bottom: 0, left: 20, right: 20 }}
+												barSize={18}
+											>
+												<CartesianGrid strokeDasharray="3 3" />
 
-											<XAxis type="category" dataKey="name" fontSize={12} />
+												<XAxis type="category" dataKey="name" fontSize={12} />
 
-											<YAxis type="number" hide />
+												<YAxis type="number" hide />
 
-											<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[10, 10, 0, 0]}>
-												<LabelList
-													dataKey="sum"
-													position="top"
-													style={{
-														fill: "#000000",
-														fontSize: 12,
-														fontWeight: 400
-													}}
-													formatter={(value: any) => Number(value).toFixed(2)}
-												/>
-											</Bar>
-										</BarChart>
-									</ResponsiveContainer>
-								)}
-							</>
-						)}
+												<Bar dataKey="sum" fill="#ff751daa" activeBar={{ fill: "#ff751d" }} radius={[10, 10, 0, 0]}>
+													<LabelList
+														dataKey="sum"
+														position="top"
+														style={{
+															fill: "#000000",
+															fontSize: 12,
+															fontWeight: 400
+														}}
+														formatter={(value: any) => Number(value).toFixed(2)}
+													/>
+												</Bar>
+											</BarChart>
+										</ResponsiveContainer>
+									)}
+								</>
+							)}
+						</div>
 					</div>
 				</Container>
 			</main>

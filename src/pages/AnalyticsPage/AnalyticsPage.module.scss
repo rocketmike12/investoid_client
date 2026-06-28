@@ -164,6 +164,8 @@
 		box-shadow: $content-shadow-light;
 
 		background-color: $bg-light;
+
+        margin-bottom: 40px;
 	}
 
 	&__categories {
@@ -175,7 +177,7 @@
 		flex-wrap: wrap;
 
 		&__item {
-			width: 50%;
+			width: 30%;
 			padding: 20px 0;
 
 			display: flex;
@@ -212,6 +214,11 @@
 	background-color: $accent-light;
 	color: $bg-light;
 	box-shadow: $button-shadow-light;
+}
+
+.chart-wrap {
+    width: 100%;
+    height: 320px;
 }
 
 @include tab() {
